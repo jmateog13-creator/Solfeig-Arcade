@@ -1,303 +1,342 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>La Màquina de Solfeig Arcade</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
 
-<!-- ===== FONS ===== -->
+  <!-- ===== FONS
 <canvas id="bg-canvas"></canvas>
 <div class="noise"></div>
 
 <!-- ====================================================
      PANTALLA 1 · LANDING
      ==================================================== -->
-<div id="screen-landing" class="screen active">
+  <div id="screen-landing" class="screen active">
 
-  <!-- Staff decoratiu top -->
-  <div class="staff-deco" aria-hidden="true">
-    <div class="staff-line"></div><div class="staff-line"></div>
-    <div class="staff-line"></div><div class="staff-line"></div>
-    <div class="staff-line"></div>
-  </div>
-
-  <main class="landing-main">
-
-    <!-- Pill de marca -->
-    <div class="brand-pill">
-      <span class="brand-dot"></span>
-      AULATECH · MAIG 2026
+    <!-- Staff decoratiu top -->
+    <div class="staff-deco" aria-hidden="true">
+      <div class="staff-line"></div>
+      <div class="staff-line"></div>
+      <div class="staff-line"></div>
+      <div class="staff-line"></div>
+      <div class="staff-line"></div>
     </div>
 
-    <!-- Títol -->
-    <h1 class="landing-h1">
-      La Màquina
-      <em>de Solfeig Arcade</em>
-    </h1>
+    <main class="landing-main">
 
-    <p class="landing-p">
-      Entra a la màquina. Entrena l'oïda i la lectura de notes
-      a través de <strong>14 minijocs</strong> dissenyats per a tu.
-    </p>
+      <!-- Pill de marca -->
+      <div class="brand-pill">
+        <span class="brand-dot"></span>
+        AULATECH · MAIG 2026
+      </div>
 
-    <!-- CTA -->
-    <button id="btn-enter" class="cta-btn">
-      <span>Entra a la màquina</span>
-      <svg class="cta-arrow" viewBox="0 0 20 20" fill="none">
-        <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
+      <!-- Títol -->
+      <h1 class="landing-h1">
+        La Màquina
+        <em>de Solfeig Arcade</em>
+      </h1>
 
-    <!-- Comptador progrés -->
-    <div class="landing-stats">
-      <div class="lstat">
-        <div class="lstat-ring">
-          <svg viewBox="0 0 44 44">
-            <circle class="ring-track" cx="22" cy="22" r="18"/>
-            <circle class="ring-fill" id="ring-fill" cx="22" cy="22" r="18"/>
-          </svg>
-          <span class="lstat-num" id="stat-done">0</span>
+      <p class="landing-p">
+        Entra a la màquina. Entrena l'oïda i la lectura de notes
+        a través de <strong>14 minijocs</strong> dissenyats per a tu.
+      </p>
+
+      <!-- CTA -->
+      <button id="btn-enter" class="cta-btn">
+        <span>Entra a la màquina</span>
+        <svg class="cta-arrow" viewBox="0 0 20 20" fill="none">
+          <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+
+      <!-- Comptador progrés -->
+      <div class="landing-stats">
+        <div class="lstat">
+          <div class="lstat-ring">
+            <svg viewBox="0 0 44 44">
+              <circle class="ring-track" cx="22" cy="22" r="18" />
+              <circle class="ring-fill" id="ring-fill" cx="22" cy="22" r="18" />
+            </svg>
+            <span class="lstat-num" id="stat-done">0</span>
+          </div>
+          <span class="lstat-lbl">de 14 completats</span>
         </div>
-        <span class="lstat-lbl">de 14 completats</span>
+        <div class="lstat-divider"></div>
+        <div class="lstat-pills">
+          <div class="lstat-pill dictats-pill">🎧 Dictats Melòdics</div>
+          <div class="lstat-pill notas-pill">👁️ Visualització</div>
+        </div>
       </div>
-      <div class="lstat-divider"></div>
-      <div class="lstat-pills">
-        <div class="lstat-pill dictats-pill">🎧 Dictats Melòdics</div>
-        <div class="lstat-pill notas-pill">👁️ Visualització</div>
-      </div>
+
+    </main>
+
+    <!-- Notes flotants -->
+    <div class="floaters" aria-hidden="true">
+      <span style="--d:0s;--x:8%;--y:22%">♩</span>
+      <span style="--d:-4s;--x:91%;--y:18%">♪</span>
+      <span style="--d:-8s;--x:5%;--y:74%">♫</span>
+      <span style="--d:-12s;--x:88%;--y:70%">♩</span>
+      <span style="--d:-6s;--x:50%;--y:10%">𝄞</span>
+      <span style="--d:-2s;--x:72%;--y:88%">♪</span>
     </div>
 
-  </main>
-
-  <!-- Notes flotants -->
-  <div class="floaters" aria-hidden="true">
-    <span style="--d:0s;--x:8%;--y:22%">♩</span>
-    <span style="--d:-4s;--x:91%;--y:18%">♪</span>
-    <span style="--d:-8s;--x:5%;--y:74%">♫</span>
-    <span style="--d:-12s;--x:88%;--y:70%">♩</span>
-    <span style="--d:-6s;--x:50%;--y:10%">𝄞</span>
-    <span style="--d:-2s;--x:72%;--y:88%">♪</span>
   </div>
 
-</div>
-
-<!-- ====================================================
+  <!-- ====================================================
      PANTALLA 2 · HUB
      ==================================================== -->
-<div id="screen-hub" class="screen">
+  <div id="screen-hub" class="screen">
 
-  <!-- Header -->
-  <header class="hub-nav">
-    <button id="btn-back" class="nav-back">
-      <svg viewBox="0 0 20 20" fill="none">
-        <path d="M16 10H4M9 5l-5 5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span>Inici</span>
-    </button>
-
-    <div class="nav-center">
-      <span class="nav-title">La Màquina de Solfeig Arcade</span>
-    </div>
-
-    <div class="nav-progress">
-      <div class="nav-prog-ring">
-        <svg viewBox="0 0 32 32">
-          <circle class="np-track" cx="16" cy="16" r="12"/>
-          <circle class="np-fill" id="nav-ring-fill" cx="16" cy="16" r="12"/>
+    <!-- Header -->
+    <header class="hub-nav">
+      <button id="btn-back" class="nav-back">
+        <svg viewBox="0 0 20 20" fill="none">
+          <path d="M16 10H4M9 5l-5 5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round" />
         </svg>
+        <span>Inici</span>
+      </button>
+
+      <div class="nav-center">
+        <span class="nav-title">La Màquina de Solfeig Arcade</span>
       </div>
-      <div class="nav-prog-text">
-        <span id="hub-done-num">0</span><span class="nav-prog-total">/14</span>
+
+      <div class="nav-progress">
+        <div class="nav-prog-ring">
+          <svg viewBox="0 0 32 32">
+            <circle class="np-track" cx="16" cy="16" r="12" />
+            <circle class="np-fill" id="nav-ring-fill" cx="16" cy="16" r="12" />
+          </svg>
+        </div>
+        <div class="nav-prog-text">
+          <span id="hub-done-num">0</span><span class="nav-prog-total">/14</span>
+        </div>
       </div>
+    </header>
+
+    <!-- Body: dos panells -->
+    <div class="hub-grid">
+
+      <!-- DICTATS MELÒDICS -->
+      <section class="cat-panel dictats-panel">
+        <div class="cat-head">
+          <div class="cat-icon dictats-icon">🎧</div>
+          <div class="cat-meta">
+            <h2 class="cat-name">Dictats Melòdics</h2>
+            <p class="cat-desc">Entrenament d'oïda musical</p>
+          </div>
+          <div class="cat-badge" id="badge-dictats">0/6</div>
+        </div>
+        <div class="cat-progress-bar">
+          <div class="cat-progress-fill dictats-fill" id="bar-dictats" style="width:0%"></div>
+        </div>
+        <ul class="game-list" id="list-dictats"></ul>
+      </section>
+
+      <!-- VISUALITZACIÓ DE NOTES -->
+      <section class="cat-panel notas-panel">
+        <div class="cat-head">
+          <div class="cat-icon notas-icon">👁️</div>
+          <div class="cat-meta">
+            <h2 class="cat-name">Visualització de Notes</h2>
+            <p class="cat-desc">Lectura en clau de Sol</p>
+          </div>
+          <div class="cat-badge" id="badge-notas">0/8</div>
+        </div>
+        <div class="cat-progress-bar">
+          <div class="cat-progress-fill notas-fill" id="bar-notas" style="width:0%"></div>
+        </div>
+        <ul class="game-list" id="list-notas"></ul>
+      </section>
+
     </div>
-  </header>
-
-  <!-- Body: dos panells -->
-  <div class="hub-grid">
-
-    <!-- DICTATS MELÒDICS -->
-    <section class="cat-panel dictats-panel">
-      <div class="cat-head">
-        <div class="cat-icon dictats-icon">🎧</div>
-        <div class="cat-meta">
-          <h2 class="cat-name">Dictats Melòdics</h2>
-          <p class="cat-desc">Entrenament d'oïda musical</p>
-        </div>
-        <div class="cat-badge" id="badge-dictats">0/6</div>
-      </div>
-      <div class="cat-progress-bar"><div class="cat-progress-fill dictats-fill" id="bar-dictats" style="width:0%"></div></div>
-      <ul class="game-list" id="list-dictats"></ul>
-    </section>
-
-    <!-- VISUALITZACIÓ DE NOTES -->
-    <section class="cat-panel notas-panel">
-      <div class="cat-head">
-        <div class="cat-icon notas-icon">👁️</div>
-        <div class="cat-meta">
-          <h2 class="cat-name">Visualització de Notes</h2>
-          <p class="cat-desc">Lectura en clau de Sol</p>
-        </div>
-        <div class="cat-badge" id="badge-notas">0/8</div>
-      </div>
-      <div class="cat-progress-bar"><div class="cat-progress-fill notas-fill" id="bar-notas" style="width:0%"></div></div>
-      <ul class="game-list" id="list-notas"></ul>
-    </section>
-
   </div>
-</div>
 
-<!-- ====================================================
+  <!-- ====================================================
      JAVASCRIPT
      ==================================================== -->
-<script>
-// ============================================================
-// FONS CANVAS
-// ============================================================
-(function() {
-  const cv = document.getElementById("bg-canvas");
-  const cx = cv.getContext("2d");
-  const orbs = [
-    { x: 0.15, y: 0.2,  r: 0.45, color: [80, 60, 255],  speed: 0.0003 },
-    { x: 0.85, y: 0.75, r: 0.5,  color: [200, 50, 180], speed: 0.0004 },
-    { x: 0.5,  y: 0.5,  r: 0.35, color: [30, 140, 255], speed: 0.0002 }
-  ];
-  let t = 0;
-  function resize() { cv.width = window.innerWidth; cv.height = window.innerHeight; }
-  resize();
-  window.addEventListener("resize", resize);
-  function frame() {
-    t += 1;
-    cx.clearRect(0, 0, cv.width, cv.height);
-    orbs.forEach((o, i) => {
-      const px = (o.x + Math.sin(t * o.speed + i * 2.1) * 0.12) * cv.width;
-      const py = (o.y + Math.cos(t * o.speed * 0.7 + i * 1.3) * 0.1) * cv.height;
-      const r  = o.r * Math.min(cv.width, cv.height);
-      const g  = cx.createRadialGradient(px, py, 0, px, py, r);
-      g.addColorStop(0, `rgba(${o.color},0.18)`);
-      g.addColorStop(1, `rgba(${o.color},0)`);
-      cx.fillStyle = g;
-      cx.fillRect(0, 0, cv.width, cv.height);
+  <script>
+    // ============================================================
+    // FONS CANVAS
+    // ============================================================
+    (function () {
+      const cv = document.getElementById("bg-canvas");
+      const cx = cv.getContext("2d");
+      const orbs = [
+        { x: 0.15, y: 0.2, r: 0.45, color: [80, 60, 255], speed: 0.0003 },
+        { x: 0.85, y: 0.75, r: 0.5, color: [200, 50, 180], speed: 0.0004 },
+        { x: 0.5, y: 0.5, r: 0.35, color: [30, 140, 255], speed: 0.0002 }
+      ];
+      let t = 0;
+      function resize() { cv.width = window.innerWidth; cv.height = window.innerHeight; }
+      resize();
+      window.addEventListener("resize", resize);
+      function frame() {
+        t += 1;
+        cx.clearRect(0, 0, cv.width, cv.height);
+        orbs.forEach((o, i) => {
+          const px = (o.x + Math.sin(t * o.speed + i * 2.1) * 0.12) * cv.width;
+          const py = (o.y + Math.cos(t * o.speed * 0.7 + i * 1.3) * 0.1) * cv.height;
+          const r = o.r * Math.min(cv.width, cv.height);
+          const g = cx.createRadialGradient(px, py, 0, px, py, r);
+          g.addColorStop(0, `rgba(${o.color},0.18)`);
+          g.addColorStop(1, `rgba(${o.color},0)`);
+          cx.fillStyle = g;
+          cx.fillRect(0, 0, cv.width, cv.height);
+        });
+        requestAnimationFrame(frame);
+      }
+      frame();
+    })();
+
+    // ============================================================
+    // DADES DELS JOCS
+    // ============================================================
+    const DICTATS = [
+      {
+        id: "afinador", icon: "✨", name: "Afinador de Constel·lacions", desc: "Afina intervals per oïda · 20 nivells",
+        href: "1.Dictados melódicos/Afinador-de-Constel.lacions/index.html",
+        done: () => ls("hub:done:afinador") === "1"
+      },
+      {
+        id: "cartografia", icon: "🗺️", name: "Cartografia Sonora", desc: "Mapeja els sons a l'espai · 15 nivells",
+        href: "1.Dictados melódicos/Cartografia-Sonora/index.html",
+        done: () => ls("hub:done:cartografia") === "1"
+      },
+      {
+        id: "geometria", icon: "📐", name: "Geometria Cartesiana", desc: "Traça figures amb intervals · 15 nivells",
+        href: "1.Dictados melódicos/Geometria-Cartesiana/index.html",
+        done: () => ls("hub:done:geometria") === "1"
+      },
+      {
+        id: "jeroglifics", icon: "👁️‍🗨️", name: "Jeroglífics d'Oïda", desc: "Desxifra seqüències sonores · 15 nivells",
+        href: "1.Dictados melódicos/Jeroglifics-Oida/index.html",
+        done: () => ls("hub:done:jeroglifics") === "1"
+      },
+      {
+        id: "llenc", icon: "🎨", name: "Llenç Harmònic", desc: "Pinta amb acords i melodies · 15 nivells",
+        href: "1.Dictados melódicos/Llenc-Harmonic/index.html",
+        done: () => ls("hub:done:llenc") === "1"
+      },
+      {
+        id: "simon", icon: "🎵", name: "Simon Simfònic", desc: "Memòria melòdica per fases · 15 nivells",
+        href: "1.Dictados melódicos/Simon Simfònic/index.html",
+        done: () => parseInt(ls("simon-sinfonic:highestUnlocked") || "0") >= 16
+      }
+    ];
+
+    const NOTAS = [
+      {
+        id: "enrutador", icon: "🔌", name: "Enrutador de Plaques", desc: "DO·RE·MI → FA·SOL·LA·SI · 16 nivells",
+        href: "1.Visualizacion de Notas/EnrutadorDePlaques/index.html",
+        done: () => scoresAll("enrutador-plaques:progress", 16)
+      },
+      {
+        id: "esprint", icon: "🏃", name: "Esprint Musical", desc: "DO·MI·SOL → FA·LA·DO+ · 16 nivells",
+        href: "1.Visualizacion de Notas/EsprintMusical/index.html",
+        done: () => scoresAll("esprint-musical:progress", 16)
+      },
+      {
+        id: "impremta", icon: "🖨️", name: "La Impremta Clàssica", desc: "FA·LA·DO5 → DO·MI·SOL · 16 nivells",
+        href: "1.Visualizacion de Notas/LaImpremta/index.html",
+        done: () => scoresAll("la-impremta:progress", 16)
+      },
+      {
+        id: "maki", icon: "🍣", name: "MakiNotes", desc: "Lectura de notes a la cinta · 16 nivells",
+        href: "1.Visualizacion de Notas/MakiNotes/index.html",
+        done: () => scoresAll("maki-notes:progress", 16)
+      },
+      {
+        id: "microscopi", icon: "🔬", name: "Microscopi Sònic", desc: "Anàlisi de notes al detall · 16 nivells",
+        href: "1.Visualizacion de Notas/MicroscopiSonic/index.html",
+        done: () => scoresAll("microscopi-sonic:progress", 16)
+      },
+      {
+        id: "invaders", icon: "👾", name: "Space Invaders Musical", desc: "Dispara la nota correcta · 20 nivells",
+        href: "1.Visualizacion de Notas/Space Invaders Musical/index.html",
+        done: () => jsonKey("invasio.v2.progress", d => (d.unlocked || 1) >= 21)
+      },
+      {
+        id: "astro", icon: "🚀", name: "Astro-Express", desc: "Notes a velocitat còsmica · 20 nivells",
+        href: "1.Visualizacion de Notas/Astro-Express/index.html",
+        done: () => jsonKey("astro-express-v3", d => Object.keys(d.completed || {}).length >= 20)
+      },
+      {
+        id: "orbita", icon: "🪐", name: "Òrbita 360", desc: "Navega l'escala en òrbita · 20 nivells",
+        href: "1.Visualizacion de Notas/Orbita 360/index.html",
+        done: () => jsonKey("orbita360_v2", d => Object.keys(d.stars || {}).filter(k => d.stars[k] > 0).length >= 20)
+      }
+    ];
+
+    // ============================================================
+    // HELPERS LOCALSTORGE
+    // ============================================================
+    function ls(key) { try { return localStorage.getItem(key); } catch { return null; } }
+    function scoresAll(key, n) {
+      try { const d = JSON.parse(ls(key) || "{}"); return Object.keys(d.scores || {}).length >= n; }
+      catch { return false; }
+    }
+    function jsonKey(key, fn) {
+      try { return fn(JSON.parse(ls(key) || "{}")); } catch { return false; }
+    }
+
+    // ============================================================
+    // PROGRESS RING
+    // ============================================================
+    const RING_C = 2 * Math.PI * 18; // landing ring (r=18)
+    const RING_N = 2 * Math.PI * 12; // nav ring (r=12)
+
+    function setRing(id, done, total, circumference) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const pct = total > 0 ? done / total : 0;
+      el.style.strokeDashoffset = circumference * (1 - pct);
+    }
+
+    // ============================================================
+    // NAVEGACIÓ
+    // ============================================================
+    const sLanding = document.getElementById("screen-landing");
+    const sHub = document.getElementById("screen-hub");
+
+    document.getElementById("btn-enter").addEventListener("click", () => {
+      sLanding.classList.add("out");
+      setTimeout(() => {
+        sLanding.classList.remove("active", "out");
+        sHub.classList.add("active");
+        refreshHub();
+      }, 380);
     });
-    requestAnimationFrame(frame);
-  }
-  frame();
-})();
 
-// ============================================================
-// DADES DELS JOCS
-// ============================================================
-const DICTATS = [
-  { id:"afinador",   icon:"✨", name:"Afinador de Constel·lacions", desc:"Afina intervals per oïda · 20 nivells",
-    href:"1.Dictados melódicos/Afinador-de-Constel.lacions/index.html",
-    done: () => ls("hub:done:afinador") === "1" },
-  { id:"cartografia",icon:"🗺️", name:"Cartografia Sonora",          desc:"Mapeja els sons a l'espai · 15 nivells",
-    href:"1.Dictados melódicos/Cartografia-Sonora/index.html",
-    done: () => ls("hub:done:cartografia") === "1" },
-  { id:"geometria",  icon:"📐", name:"Geometria Cartesiana",         desc:"Traça figures amb intervals · 15 nivells",
-    href:"1.Dictados melódicos/Geometria-Cartesiana/index.html",
-    done: () => ls("hub:done:geometria") === "1" },
-  { id:"jeroglifics",icon:"👁️‍🗨️", name:"Jeroglífics d'Oïda",         desc:"Desxifra seqüències sonores · 15 nivells",
-    href:"1.Dictados melódicos/Jeroglifics-Oida/index.html",
-    done: () => ls("hub:done:jeroglifics") === "1" },
-  { id:"llenc",      icon:"🎨", name:"Llenç Harmònic",               desc:"Pinta amb acords i melodies · 15 nivells",
-    href:"1.Dictados melódicos/Llenc-Harmonic/index.html",
-    done: () => ls("hub:done:llenc") === "1" },
-  { id:"simon",      icon:"🎵", name:"Simon Simfònic",               desc:"Memòria melòdica per fases · 15 nivells",
-    href:"1.Dictados melódicos/Simon Simfònic/index.html",
-    done: () => parseInt(ls("simon-sinfonic:highestUnlocked") || "0") >= 16 }
-];
+    document.getElementById("btn-back").addEventListener("click", () => {
+      sHub.classList.add("out");
+      setTimeout(() => {
+        sHub.classList.remove("active", "out");
+        sLanding.classList.add("active");
+        refreshLanding();
+      }, 380);
+    });
 
-const NOTAS = [
-  { id:"enrutador",  icon:"🔌", name:"Enrutador de Plaques",         desc:"DO·RE·MI → FA·SOL·LA·SI · 16 nivells",
-    href:"1.Visualizacion de Notas/EnrutadorDePlaques/index.html",
-    done: () => scoresAll("enrutador-plaques:progress", 16) },
-  { id:"esprint",    icon:"🏃", name:"Esprint Musical",              desc:"DO·MI·SOL → FA·LA·DO+ · 16 nivells",
-    href:"1.Visualizacion de Notas/EsprintMusical/index.html",
-    done: () => scoresAll("esprint-musical:progress", 16) },
-  { id:"impremta",   icon:"🖨️", name:"La Impremta Clàssica",         desc:"FA·LA·DO5 → DO·MI·SOL · 16 nivells",
-    href:"1.Visualizacion de Notas/LaImpremta/index.html",
-    done: () => scoresAll("la-impremta:progress", 16) },
-  { id:"maki",       icon:"🍣", name:"MakiNotes",                    desc:"Lectura de notes a la cinta · 16 nivells",
-    href:"1.Visualizacion de Notas/MakiNotes/index.html",
-    done: () => scoresAll("maki-notes:progress", 16) },
-  { id:"microscopi", icon:"🔬", name:"Microscopi Sònic",             desc:"Anàlisi de notes al detall · 16 nivells",
-    href:"1.Visualizacion de Notas/MicroscopiSonic/index.html",
-    done: () => scoresAll("microscopi-sonic:progress", 16) },
-  { id:"invaders",   icon:"👾", name:"Space Invaders Musical",       desc:"Dispara la nota correcta · 20 nivells",
-    href:"1.Visualizacion de Notas/Space Invaders Musical/index.html",
-    done: () => jsonKey("invasio.v2.progress", d => (d.unlocked || 1) >= 21) },
-  { id:"astro",      icon:"🚀", name:"Astro-Express",                desc:"Notes a velocitat còsmica · 20 nivells",
-    href:"1.Visualizacion de Notas/Astro-Express/index.html",
-    done: () => jsonKey("astro-express-v3", d => Object.keys(d.completed || {}).length >= 20) },
-  { id:"orbita",     icon:"🪐", name:"Òrbita 360",                   desc:"Navega l'escala en òrbita · 20 nivells",
-    href:"1.Visualizacion de Notas/Orbita 360/index.html",
-    done: () => jsonKey("orbita360_v2", d => Object.keys(d.stars||{}).filter(k=>d.stars[k]>0).length >= 20) }
-];
-
-// ============================================================
-// HELPERS LOCALSTORGE
-// ============================================================
-function ls(key) { try { return localStorage.getItem(key); } catch { return null; } }
-function scoresAll(key, n) {
-  try { const d = JSON.parse(ls(key)||"{}"); return Object.keys(d.scores||{}).length >= n; }
-  catch { return false; }
-}
-function jsonKey(key, fn) {
-  try { return fn(JSON.parse(ls(key)||"{}")); } catch { return false; }
-}
-
-// ============================================================
-// PROGRESS RING
-// ============================================================
-const RING_C = 2 * Math.PI * 18; // landing ring (r=18)
-const RING_N = 2 * Math.PI * 12; // nav ring (r=12)
-
-function setRing(id, done, total, circumference) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const pct = total > 0 ? done / total : 0;
-  el.style.strokeDashoffset = circumference * (1 - pct);
-}
-
-// ============================================================
-// NAVEGACIÓ
-// ============================================================
-const sLanding = document.getElementById("screen-landing");
-const sHub     = document.getElementById("screen-hub");
-
-document.getElementById("btn-enter").addEventListener("click", () => {
-  sLanding.classList.add("out");
-  setTimeout(() => {
-    sLanding.classList.remove("active","out");
-    sHub.classList.add("active");
-    refreshHub();
-  }, 380);
-});
-
-document.getElementById("btn-back").addEventListener("click", () => {
-  sHub.classList.add("out");
-  setTimeout(() => {
-    sHub.classList.remove("active","out");
-    sLanding.classList.add("active");
-    refreshLanding();
-  }, 380);
-});
-
-// ============================================================
-// RENDER HUB
-// ============================================================
-function buildList(games, listEl) {
-  listEl.innerHTML = "";
-  games.forEach((g, i) => {
-    const done = g.done();
-    const li = document.createElement("li");
-    li.className = "gitem" + (done ? " done" : "");
-    li.style.animationDelay = `${i * 60}ms`;
-    li.innerHTML = `
+    // ============================================================
+    // RENDER HUB
+    // ============================================================
+    function buildList(games, listEl) {
+      listEl.innerHTML = "";
+      games.forEach((g, i) => {
+        const done = g.done();
+        const li = document.createElement("li");
+        li.className = "gitem" + (done ? " done" : "");
+        li.style.animationDelay = `${i * 60}ms`;
+        li.innerHTML = `
       <a href="${g.href}" class="glink">
         <div class="gicon">${g.icon}</div>
         <div class="gmeta">
@@ -311,43 +350,44 @@ function buildList(games, listEl) {
           }
         </div>
       </a>`;
-    listEl.appendChild(li);
-  });
-}
+        listEl.appendChild(li);
+      });
+    }
 
-function refreshHub() {
-  buildList(DICTATS, document.getElementById("list-dictats"));
-  buildList(NOTAS,   document.getElementById("list-notas"));
-  const dDone = DICTATS.filter(g => g.done()).length;
-  const nDone = NOTAS.filter(g => g.done()).length;
-  const total = dDone + nDone;
-  document.getElementById("badge-dictats").textContent = `${dDone}/6`;
-  document.getElementById("badge-notas").textContent   = `${nDone}/8`;
-  document.getElementById("hub-done-num").textContent  = total;
-  document.getElementById("bar-dictats").style.width   = `${(dDone/6)*100}%`;
-  document.getElementById("bar-notas").style.width     = `${(nDone/8)*100}%`;
-  setRing("nav-ring-fill", total, 14, RING_N);
-  refreshLanding();
-}
+    function refreshHub() {
+      buildList(DICTATS, document.getElementById("list-dictats"));
+      buildList(NOTAS, document.getElementById("list-notas"));
+      const dDone = DICTATS.filter(g => g.done()).length;
+      const nDone = NOTAS.filter(g => g.done()).length;
+      const total = dDone + nDone;
+      document.getElementById("badge-dictats").textContent = `${dDone}/6`;
+      document.getElementById("badge-notas").textContent = `${nDone}/8`;
+      document.getElementById("hub-done-num").textContent = total;
+      document.getElementById("bar-dictats").style.width = `${(dDone / 6) * 100}%`;
+      document.getElementById("bar-notas").style.width = `${(nDone / 8) * 100}%`;
+      setRing("nav-ring-fill", total, 14, RING_N);
+      refreshLanding();
+    }
 
-function refreshLanding() {
-  const total = DICTATS.filter(g=>g.done()).length + NOTAS.filter(g=>g.done()).length;
-  document.getElementById("stat-done").textContent = total;
-  setRing("ring-fill", total, 14, RING_C);
-}
+    function refreshLanding() {
+      const total = DICTATS.filter(g => g.done()).length + NOTAS.filter(g => g.done()).length;
+      document.getElementById("stat-done").textContent = total;
+      setRing("ring-fill", total, 14, RING_C);
+    }
 
-// Torna d'un joc → refrescar
-window.addEventListener("pageshow", () => {
-  if (sHub.classList.contains("active"))     refreshHub();
-  else                                        refreshLanding();
-});
-window.addEventListener("focus", () => {
-  if (sHub.classList.contains("active"))     refreshHub();
-  else                                        refreshLanding();
-});
+    // Torna d'un joc → refrescar
+    window.addEventListener("pageshow", () => {
+      if (sHub.classList.contains("active")) refreshHub();
+      else refreshLanding();
+    });
+    window.addEventListener("focus", () => {
+      if (sHub.classList.contains("active")) refreshHub();
+      else refreshLanding();
+    });
 
-// Init
-refreshLanding();
-</script>
+    // Init
+    refreshLanding();
+  </script>
 </body>
+
 </html>
