@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASTRO-EXPRESS · Control Orbital</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- FONS GLOBAL -->
+    <div class="space-background">
+        <canvas id="starfield"></canvas>
+        <div class="nebula nebula-1"></div>
+        <div class="nebula nebula-2"></div>
+        <div class="nebula nebula-3"></div>
+        <div class="orbital-ring ring-1"></div>
+        <div class="orbital-ring ring-2"></div>
+    </div>
+
+    <!-- BOOT SEQUENCE -->
+    <section id="screen-boot" class="screen active">
+        <div class="boot-content">
+            <div class="boot-logo">▣</div>
+            <div class="boot-title">ASTRO-EXPRESS</div>
+            <div class="boot-subtitle">SISTEMA DE COMANDAMENT ORBITAL</div>
+            <div class="boot-progress"><div class="boot-progress-fill" id="bootFill"></div></div>
+            <div class="boot-log" id="bootLog"></div>
+        </div>
+    </section>
+
+    <!-- LANDING -->
+    <section id="screen-landing" class="screen">
+        <div class="earth-orbit">
+            <div class="earth"></div>
+            <div class="atmosphere-glow"></div>
+            <div class="orbital-station"></div>
+        </div>
+
+        <div class="landing-content">
+            <div class="title-block">
+                <div class="prefix-tag">▣ DIVISIÓ ORBITAL · ESTACIÓ ALPHA-7</div>
+                <h1 class="main-title">
+                    <span class="title-astro">ASTRO</span><span class="title-dash">-</span><span class="title-express">EXPRESS</span>
+                </h1>
+                <p class="subtitle">CONTROL ORBITAL · CLASSIFICACIÓ HARMÒNICA</p>
+                <div class="title-line"></div>
+            </div>
+
+            <div class="status-readout">
+                <div class="status-row"><span class="status-label">SISTEMA</span><span class="status-value status-ok">OPERATIU</span></div>
+                <div class="status-row"><span class="status-label">PROTOCOL</span><span class="status-value">SOLFEIG-V3.1</span></div>
+                <div class="status-row"><span class="status-label">CONTROLADOR</span><span class="status-value status-pulse">A L'ESPERA</span></div>
+            </div>
+
+            <div class="holo-buttons">
+                <button class="holo-btn holo-btn-primary" data-action="goto-levels">
+                    <span class="btn-icon">▶</span>
+                    <span class="btn-label">PRENDRE EL CONTROL</span>
+                    <span class="btn-sublabel">Iniciar campanya orbital</span>
+                </button>
+                <div class="button-row">
+                    <button class="holo-btn holo-btn-secondary" data-action="goto-tutorial">
+                        <span class="btn-icon">📖</span>
+                        <span class="btn-label">TUTORIAL</span>
+                    </button>
+                    <button class="holo-btn holo-btn-secondary" data-action="goto-achievements">
+                        <span class="btn-icon">★</span>
+                        <span class="btn-label">ASSOLIMENTS</span>
+                    </button>
+                    <button class="holo-btn holo-btn-secondary" data-action="goto-settings">
+                        <span class="btn-icon">⚙</span>
+                        <span class="btn-label">CONFIGURACIÓ</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="hud-corners">
+                <div class="hud-corner top-left">◢</div>
+                <div class="hud-corner top-right">◣</div>
+                <div class="hud-corner bottom-left">◥</div>
+                <div class="hud-corner bottom-right">◤</div>
+            </div>
+
+            <div class="version-tag">BUILD 4.7-ORBITAL</div>
+        </div>
+    </section>
+
+
+    <!-- LEVEL SELECTOR -->
+    <section id="screen-levels" class="screen">
+        <div class="panel-frame panel-wide">
+            <header class="panel-header">
+                <span class="panel-tag">▣ CAMPANYA · 20 RUTES COMERCIALS</span>
+                <h2>MAPA TÀCTIC</h2>
+                <div class="progress-readout">
+                    <span>PROGRÉS GLOBAL</span>
+                    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                    <span id="progressText">0/20</span>
+                </div>
+            </header>
+
+            <div class="levels-grid" id="levelsGrid"></div>
+
+            <div class="panel-footer">
+                <button class="holo-btn holo-btn-secondary" data-action="goto-landing">
+                    <span class="btn-icon">◀</span><span class="btn-label">SORTIR</span>
+                </button>
+                <button class="holo-btn holo-btn-warning" id="resetProgressBtn">
+                    <span class="btn-icon">⟲</span><span class="btn-label">REINICIAR PROGRÉS</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="screen-achievements" class="screen">
+        <div class="panel-frame panel-wide">
+            <header class="panel-header">
+                <span class="panel-tag">▣ REGISTRE DE CONDECORACIONS</span>
+                <h2>ASSOLIMENTS</h2>
+                <div class="progress-readout">
+                    <span>DESBLOQUEJATS</span>
+                    <div class="progress-bar"><div class="progress-fill" id="achievFill"></div></div>
+                    <span id="achievText">0/0</span>
+                </div>
+            </header>
+            <div class="achievements-grid" id="achievementsGrid"></div>
+            <div class="panel-footer">
+                <button class="holo-btn holo-btn-secondary" data-action="goto-landing">
+                    <span class="btn-icon">◀</span><span class="btn-label">TORNAR</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="screen-settings" class="screen">
+        <div class="panel-frame">
+            <header class="panel-header">
+                <span class="panel-tag">▣ PARÀMETRES OPERATIUS</span>
+                <h2>CONFIGURACIÓ</h2>
+            </header>
+
+            <div class="settings-list">
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <span class="setting-name">VOLUM PRINCIPAL</span>
+                        <span class="setting-desc">Nivell global de so</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="60" class="slider" id="setMaster">
+                    <span class="setting-value" id="setMasterVal">60</span>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <span class="setting-name">MÚSICA AMBIENT</span>
+                        <span class="setting-desc">Banda sonora procedural</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="40" class="slider" id="setMusic">
+                    <span class="setting-value" id="setMusicVal">40</span>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <span class="setting-name">EFECTES SONORS</span>
+                        <span class="setting-desc">Trens, col·lisions, UI</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="70" class="slider" id="setSfx">
+                    <span class="setting-value" id="setSfxVal">70</span>
+                </div>
+                <div class="setting-row toggle-row" id="setLetterToggle">
+                    <div class="setting-info">
+                        <span class="setting-name">LLETRES AL PENTAGRAMA</span>
+                        <span class="setting-desc">Mostra DO, RE, MI... sobre la nota (per a aprenents)</span>
+                    </div>
+                    <div class="toggle-switch" data-state="off"><div class="toggle-knob"></div></div>
+                </div>
+                <div class="setting-row toggle-row" id="setShapesToggle">
+                    <div class="setting-info">
+                        <span class="setting-name">FORMES ACCESSIBLES</span>
+                        <span class="setting-desc">Símbols geomètrics per andana (daltonisme)</span>
+                    </div>
+                    <div class="toggle-switch" data-state="on"><div class="toggle-knob"></div></div>
+                </div>
+                <div class="setting-row toggle-row" id="setBloomToggle">
+                    <div class="setting-info">
+                        <span class="setting-name">EFECTES BLOOM</span>
+                        <span class="setting-desc">Postprocessat de llum (desactivar si va lent)</span>
+                    </div>
+                    <div class="toggle-switch" data-state="on"><div class="toggle-knob"></div></div>
+                </div>
+                <div class="setting-row toggle-row" id="setShakeToggle">
+                    <div class="setting-info">
+                        <span class="setting-name">TREMOLOR DE CÀMERA</span>
+                        <span class="setting-desc">Screen shake en col·lisions</span>
+                    </div>
+                    <div class="toggle-switch" data-state="on"><div class="toggle-knob"></div></div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button class="holo-btn holo-btn-secondary" data-action="goto-landing">
+                    <span class="btn-icon">◀</span><span class="btn-label">DESAR I TORNAR</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- GAMEPLAY -->
+    <section id="screen-gameplay" class="screen">
+        <div class="game-hud">
+            <div class="hud-block">
+                <span class="hud-label">RUTA</span>
+                <span class="hud-value" id="hudLevel">01</span>
+                <span class="hud-sub" id="hudRouteName">—</span>
+            </div>
+            <div class="hud-block">
+                <span class="hud-label">PUNTUACIÓ</span>
+                <span class="hud-value hud-score" id="hudScore">0</span>
+            </div>
+            <div class="hud-block hud-center">
+                <span class="hud-label">OBJECTIU</span>
+                <div class="objective-bar"><div class="objective-fill" id="objectiveFill"></div></div>
+                <span class="hud-value-small" id="hudObjective">0/15</span>
+            </div>
+            <div class="hud-block hud-combo" id="hudComboBlock">
+                <span class="hud-label">COMBO</span>
+                <span class="hud-value hud-combo-value" id="hudCombo">×1</span>
+            </div>
+            <div class="hud-block">
+                <span class="hud-label">VIDES</span>
+                <span class="hud-value hud-lives" id="hudLives">♥♥♥</span>
+            </div>
+            <div class="hud-block">
+                <button class="hud-btn" id="pauseBtn" title="Pausa">❚❚</button>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+        <canvas id="bloomCanvas"></canvas>
+        <div class="vignette"></div>
+        <div class="scanlines"></div>
+        <div class="combo-popup-layer" id="comboPopupLayer"></div>
+        <div class="achievement-toast-layer" id="toastLayer"></div>
+
+        <div class="andana-deck" id="andanaDeck"></div>
+
+        <!-- PAUSA -->
+        <div class="overlay-modal" id="pauseModal">
+            <div class="modal-content">
+                <h2>PAUSA TÀCTICA</h2>
+                <p>Sistema en mode espera</p>
+                <div class="modal-buttons">
+                    <button class="holo-btn holo-btn-primary" data-action="resume">
+                        <span class="btn-icon">▶</span><span class="btn-label">REPRENDRE</span>
+                    </button>
+                    <button class="holo-btn holo-btn-secondary" data-action="restart">
+                        <span class="btn-icon">⟲</span><span class="btn-label">REINICIAR</span>
+                    </button>
+                    <button class="holo-btn holo-btn-warning" data-action="exit-to-levels">
+                        <span class="btn-icon">⏏</span><span class="btn-label">SORTIR</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VICTÒRIA / REVISIÓ -->
+        <div class="overlay-modal" id="victoryModal">
+            <div class="modal-content modal-victory modal-wide">
+                <div class="medal">★</div>
+                <h2>RUTA COMPLETADA</h2>
+                <p>Has assolit l'objectiu de la missió</p>
+                <div class="modal-stats">
+                    <div class="stat-row"><span>PUNTUACIÓ FINAL</span><span class="stat-val" id="victoryScore">0</span></div>
+                    <div class="stat-row"><span>PRECISIÓ</span><span class="stat-val" id="victoryAccuracy">0%</span></div>
+                    <div class="stat-row"><span>MILLOR COMBO</span><span class="stat-val" id="victoryCombo">×1</span></div>
+                    <div class="stat-row"><span>RUTA DESBLOQUEJADA</span><span class="stat-val" id="victoryUnlocked">—</span></div>
+                </div>
+
+                <div class="note-breakdown">
+                    <div class="breakdown-title">RENDIMENT PER NOTA</div>
+                    <div class="breakdown-list" id="noteBreakdown"></div>
+                </div>
+
+                <div class="modal-buttons">
+                    <button class="holo-btn holo-btn-primary" data-action="next-level">
+                        <span class="btn-icon">▶</span><span class="btn-label">SEGÜENT RUTA</span>
+                    </button>
+                    <button class="holo-btn holo-btn-secondary" data-action="restart">
+                        <span class="btn-icon">⟲</span><span class="btn-label">REPETIR</span>
+                    </button>
+                    <button class="holo-btn holo-btn-secondary" data-action="exit-to-levels">
+                        <span class="btn-icon">⏏</span><span class="btn-label">RUTES</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- DERROTA -->
+        <div class="overlay-modal" id="defeatModal">
+            <div class="modal-content modal-defeat">
+                <div class="alert">⚠</div>
+                <h2>SISTEMA COMPROMÈS</h2>
+                <p>Has perdut el control de l'estació</p>
+                <div class="modal-stats">
+                    <div class="stat-row"><span>PUNTUACIÓ</span><span class="stat-val" id="defeatScore">0</span></div>
+                    <div class="stat-row"><span>OBJECTIU</span><span class="stat-val" id="defeatObjective">0/0</span></div>
+                    <div class="stat-row"><span>MILLOR COMBO</span><span class="stat-val" id="defeatCombo">×1</span></div>
+                </div>
+                <div class="modal-buttons">
+                    <button class="holo-btn holo-btn-primary" data-action="restart">
+                        <span class="btn-icon">⟲</span><span class="btn-label">REINTENTAR</span>
+                    </button>
+                    <button class="holo-btn holo-btn-secondary" data-action="exit-to-levels">
+                        <span class="btn-icon">⏏</span><span class="btn-label">RUTES</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="countdown-overlay" id="countdownOverlay">
+            <div class="countdown-number" id="countdownNumber">3</div>
+            <div class="countdown-label">PREPARANT MISSIÓ</div>
+        </div>
+
+        <!-- TUTORIAL · INTRO DE FASE -->
+        <div class="tutorial-intro-overlay" id="tutorialIntroOverlay">
+            <div class="tut-intro-card">
+                <div class="tut-intro-step">FASE 01 / 05</div>
+                <h2 class="tut-intro-title">IDENTIFICA EL DO</h2>
+                <p class="tut-intro-desc">…</p>
+                <div class="tut-intro-objective">▼ OBJECTIU: …</div>
+                <button class="holo-btn holo-btn-primary" data-action="tutorial-dismiss-intro">
+                    <span class="btn-icon">▶</span>
+                    <span class="btn-label">COMENÇAR</span>
+                    <span class="btn-sublabel">Tecla [Espai] o [Enter]</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- TUTORIAL · FINAL -->
+        <div class="tutorial-end-overlay overlay-modal" id="tutorialEndOverlay">
+            <div class="modal-content modal-victory modal-wide">
+                <div class="medal">★</div>
+                <h2>PROTOCOL DESBLOCAT</h2>
+                <p>Has completat l'entrenament. Estàs llest per la teva primera missió orbital.</p>
+                <div class="modal-buttons">
+                    <button class="holo-btn holo-btn-primary" data-action="tutorial-finish-levels">
+                        <span class="btn-icon">▶</span><span class="btn-label">ANAR A RUTES</span>
+                    </button>
+                    <button class="holo-btn holo-btn-secondary" data-action="tutorial-finish-restart">
+                        <span class="btn-icon">⟲</span><span class="btn-label">REPETIR TUTORIAL</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLOW-MO INDICATOR -->
+        <div class="slowmo-indicator" id="slowmoIndicator">
+            <div class="slowmo-text">⚠ ÚLTIMA VIDA · TEMPS DILATAT</div>
+        </div>
+    </section>
+
+    <!-- TRANSICIÓ ENTRE PANTALLES -->
+    <div class="screen-wipe" id="screenWipe"></div>
+
+    <script src="audio.js"></script>
+    <script src="vfx.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
