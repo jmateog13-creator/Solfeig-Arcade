@@ -204,32 +204,32 @@
     const DICTATS = [
       {
         id: "afinador", icon: "✨", name: "Afinador de Constel·lacions", desc: "Afina intervals per oïda · 20 nivells",
-        href: "1.Dictados melódicos/Afinador-de-Constel.lacions/index.html",
+        href: "Dictats/Afinador-de-Constel.lacions/index.html",
         done: () => ls("hub:done:afinador") === "1"
       },
       {
         id: "cartografia", icon: "🗺️", name: "Cartografia Sonora", desc: "Mapeja els sons a l'espai · 15 nivells",
-        href: "1.Dictados melódicos/Cartografia-Sonora/index.html",
+        href: "Dictats/Cartografia-Sonora/index.html",
         done: () => ls("hub:done:cartografia") === "1"
       },
       {
         id: "geometria", icon: "📐", name: "Geometria Cartesiana", desc: "Traça figures amb intervals · 15 nivells",
-        href: "1.Dictados melódicos/Geometria-Cartesiana/index.html",
+        href: "Dictats/Geometria-Cartesiana/index.html",
         done: () => ls("hub:done:geometria") === "1"
       },
       {
         id: "jeroglifics", icon: "👁️‍🗨️", name: "Jeroglífics d'Oïda", desc: "Desxifra seqüències sonores · 15 nivells",
-        href: "1.Dictados melódicos/Jeroglifics-Oida/index.html",
+        href: "Dictats/Jeroglifics-Oida/index.html",
         done: () => ls("hub:done:jeroglifics") === "1"
       },
       {
         id: "llenc", icon: "🎨", name: "Llenç Harmònic", desc: "Pinta amb acords i melodies · 15 nivells",
-        href: "1.Dictados melódicos/Llenc-Harmonic/index.html",
+        href: "Dictats/Llenc-Harmonic/index.html",
         done: () => ls("hub:done:llenc") === "1"
       },
       {
         id: "simon", icon: "🎵", name: "Simon Simfònic", desc: "Memòria melòdica per fases · 15 nivells",
-        href: "1.Dictados melódicos/Simon Simfònic/index.html",
+        href: "Dictats/Simon Simfònic/index.html",
         done: () => parseInt(ls("simon-sinfonic:highestUnlocked") || "0") >= 16
       }
     ];
@@ -237,42 +237,42 @@
     const NOTAS = [
       {
         id: "enrutador", icon: "🔌", name: "Enrutador de Plaques", desc: "DO·RE·MI → FA·SOL·LA·SI · 16 nivells",
-        href: "1.Visualizacion de Notas/EnrutadorDePlaques/index.html",
+        href: "Visualitzador de notes/EnrutadorDePlaques/index.html",
         done: () => scoresAll("enrutador-plaques:progress", 16)
       },
       {
         id: "esprint", icon: "🏃", name: "Esprint Musical", desc: "DO·MI·SOL → FA·LA·DO+ · 16 nivells",
-        href: "1.Visualizacion de Notas/EsprintMusical/index.html",
+        href: "Visualitzador de notes/EsprintMusical/index.html",
         done: () => scoresAll("esprint-musical:progress", 16)
       },
       {
         id: "impremta", icon: "🖨️", name: "La Impremta Clàssica", desc: "FA·LA·DO5 → DO·MI·SOL · 16 nivells",
-        href: "1.Visualizacion de Notas/LaImpremta/index.html",
+        href: "Visualitzador de notes/LaImpremta/index.html",
         done: () => scoresAll("la-impremta:progress", 16)
       },
       {
         id: "maki", icon: "🍣", name: "MakiNotes", desc: "Lectura de notes a la cinta · 16 nivells",
-        href: "1.Visualizacion de Notas/MakiNotes/index.html",
+        href: "Visualitzador de notes/MakiNotes/index.html",
         done: () => scoresAll("maki-notes:progress", 16)
       },
       {
         id: "microscopi", icon: "🔬", name: "Microscopi Sònic", desc: "Anàlisi de notes al detall · 16 nivells",
-        href: "1.Visualizacion de Notas/MicroscopiSonic/index.html",
+        href: "Visualitzador de notes/MicroscopiSonic/index.html",
         done: () => scoresAll("microscopi-sonic:progress", 16)
       },
       {
         id: "invaders", icon: "👾", name: "Space Invaders Musical", desc: "Dispara la nota correcta · 20 nivells",
-        href: "1.Visualizacion de Notas/Space Invaders Musical/index.html",
+        href: "Visualitzador de notes/Space Invaders Musical/index.html",
         done: () => jsonKey("invasio.v2.progress", d => (d.unlocked || 1) >= 21)
       },
       {
         id: "astro", icon: "🚀", name: "Astro-Express", desc: "Notes a velocitat còsmica · 20 nivells",
-        href: "1.Visualizacion de Notas/Astro-Express/index.html",
+        href: "Visualitzador de notes/Astro-Express/index.html",
         done: () => jsonKey("astro-express-v3", d => Object.keys(d.completed || {}).length >= 20)
       },
       {
         id: "orbita", icon: "🪐", name: "Òrbita 360", desc: "Navega l'escala en òrbita · 20 nivells",
-        href: "1.Visualizacion de Notas/Orbita 360/index.html",
+        href: "Visualitzador de notes/Orbita 360/index.html",
         done: () => jsonKey("orbita360_v2", d => Object.keys(d.stars || {}).filter(k => d.stars[k] > 0).length >= 20)
       }
     ];
