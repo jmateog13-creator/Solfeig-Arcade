@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Galeria Oculta</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="cosmos">
+    <div class="taca taca-1"></div>
+    <div class="taca taca-2"></div>
+    <div class="taca taca-3"></div>
+    <div id="estrelles-fons"></div>
+  </div>
+
+  <section id="pantalla-landing" class="pantalla activa">
+    <div class="landing-content">
+      <h1 class="titol-principal">
+        <span class="titol-fila-1">La Galeria</span>
+        <span class="titol-fila-2">Oculta</span>
+      </h1>
+      <p class="subtitol">Escolta el cant del quadre i pinta amb el teu pinzell la galeria amagada</p>
+      <div class="botons-landing">
+        <button class="boto-mistic boto-primari" data-accio="iniciar">
+          <span class="boto-icona">▶️</span>
+          <span class="boto-text">Pintar</span>
+        </button>
+        <button class="boto-mistic boto-secundari" data-accio="tutorial">
+          <span class="boto-icona">🎨</span>
+          <span class="boto-text">Com es Juga</span>
+        </button>
+      </div>
+      <p class="peu-landing">Un viatge cromàtic per la pinacoteca harmònica</p>
+    </div>
+  </section>
+
+  <section id="pantalla-tutorial" class="pantalla">
+    <div class="tutorial-content">
+      <h2 class="titol-secundari">Com Revelar les Obres</h2>
+      <div class="passos-tutorial">
+        <article class="pas-tutorial">
+          <div class="pas-numero">1</div>
+          <div class="pas-icona">🎵</div>
+          <h3>Escolta el Quadre</h3>
+          <p>Prem la paleta perquè soni la nota cristal·lina del color amagat al llenç.</p>
+        </article>
+        <article class="pas-tutorial">
+          <div class="pas-numero">2</div>
+          <div class="pas-icona">🖌️</div>
+          <h3>Calcula l'Alçada</h3>
+          <p>Dóna un cop de pinzell a l'alçada exacta on creus que correspon el so escoltat.</p>
+        </article>
+        <article class="pas-tutorial">
+          <div class="pas-numero">3</div>
+          <div class="pas-icona">🖼️</div>
+          <h3>Revela l'Obra Mestra</h3>
+          <p>Si encertes, un tros del quadre famós es desvela sota el llenç en blanc. Pinta-ho tot per veure-la sencera.</p>
+        </article>
+      </div>
+      <div class="tutorial-extra">
+        <p><span class="dau-extra">🎨 Pinzells:</span> tens tres pinzells. Cada error en consumeix un i taca el llenç.</p>
+        <p><span class="dau-extra">🖼️ Progrés:</span> supera una galeria per desbloquejar la següent fins arribar a Mestre Pintor.</p>
+      </div>
+      <button class="boto-mistic boto-primari" data-accio="tutorial-fet">
+        <span class="boto-text">Entès!</span>
+      </button>
+    </div>
+  </section>
+
+  <section id="pantalla-nivells" class="pantalla">
+    <div class="nivells-content">
+      <header class="capçalera-nivells">
+        <button class="boto-tornar boto-tornar-fort" data-accio="tornar-landing">
+          <span class="tornar-fletxa">←</span>
+          <span class="tornar-text">Menú Principal</span>
+        </button>
+        <h2 class="titol-secundari">La Pinacoteca</h2>
+        <button class="boto-tornar" data-accio="reset-progres" title="Reiniciar progrés">↺ Reiniciar</button>
+      </header>
+      <p class="instruccio-nivells">Selecciona una obra per pintar</p>
+      <div id="graella-nivells"></div>
+      <div class="llegenda-fases">
+        <div><span class="punt-fase fase-1"></span> Aprenent (1–4)</div>
+        <div><span class="punt-fase fase-2"></span> Artista (5–8)</div>
+        <div><span class="punt-fase fase-3"></span> Mestre (9–12)</div>
+        <div><span class="punt-fase fase-4"></span> Mestre Pintor (13–15)</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pantalla-joc" class="pantalla">
+    <header class="hud-superior">
+      <button class="boto-tornar" data-accio="tornar-base">⟵ Tornar a l'Estudi</button>
+      <div class="info-nivell">
+        <span class="etiqueta-nivell">Obra</span>
+        <span id="hud-nivell">1</span>
+        <span class="fase-nivell" id="hud-fase">Aprenent</span>
+      </div>
+      <div class="info-energia">
+        <span class="etiqueta-energia">Pinzells</span>
+        <span id="hud-vides">🖌️ 🖌️ 🖌️</span>
+      </div>
+    </header>
+
+    <main class="joc-area">
+      <aside class="zona-cant">
+        <button id="boto-escoltar" class="boto-cant">
+          <span class="cant-icon">🎨</span>
+          <span class="cant-text">Escoltar Color</span>
+          <span class="cant-subtext">de la Paleta</span>
+        </button>
+        <div class="progres-ronda">
+          <span class="ronda-etiqueta">Pinzellades</span>
+          <div id="progres-rondes"></div>
+        </div>
+        <div id="missatge-feedback" class="missatge-feedback"></div>
+      </aside>
+
+      <section class="zona-pentagrama">
+        <canvas id="canvas-llens" width="800" height="360"></canvas>
+      </section>
+    </main>
+
+    <div id="modal-final" class="modal-final ocult">
+      <div class="modal-contingut">
+        <h3 id="modal-titol"></h3>
+        <p id="modal-text"></p>
+        <div class="modal-botons">
+          <button class="boto-mistic boto-secundari" data-accio="modal-mapa">Pinacoteca</button>
+          <button class="boto-mistic boto-primari" id="boto-modal-principal"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="game.js"></script>
+</body>
+</html>

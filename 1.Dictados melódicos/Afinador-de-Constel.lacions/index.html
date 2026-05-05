@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>L'Afinador de Constel·lacions</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Fons d'univers persistent -->
+  <div id="cosmos">
+    <div class="nebulosa nebulosa-1"></div>
+    <div class="nebulosa nebulosa-2"></div>
+    <div class="nebulosa nebulosa-3"></div>
+    <div id="estrelles-fons"></div>
+  </div>
+
+  <!-- =============================================== -->
+  <!-- PANTALLA 1 — LANDING -->
+  <!-- =============================================== -->
+  <section id="pantalla-landing" class="pantalla activa">
+    <div class="landing-content">
+      <h1 class="titol-principal">
+        <span class="titol-fila-1">L'Afinador de</span>
+        <span class="titol-fila-2">Constel·lacions</span>
+      </h1>
+      <p class="subtitol">Escolta el cant de l'univers i encén les estrelles del cel musical</p>
+      <div class="botons-landing">
+        <button class="boto-mistic boto-primari" data-accio="iniciar">
+          <span class="boto-icona">▶️</span>
+          <span class="boto-text">Iniciar Missió</span>
+        </button>
+        <button class="boto-mistic boto-secundari" data-accio="tutorial">
+          <span class="boto-icona">🔭</span>
+          <span class="boto-text">Com es Juga</span>
+        </button>
+      </div>
+      <p class="peu-landing">Un viatge auditiu pel pentagrama estel·lar</p>
+    </div>
+  </section>
+
+  <!-- =============================================== -->
+  <!-- PANTALLA 2 — TUTORIAL -->
+  <!-- =============================================== -->
+  <section id="pantalla-tutorial" class="pantalla">
+    <div class="tutorial-content">
+      <h2 class="titol-secundari">Com Afinar les Constel·lacions</h2>
+      <div class="passos-tutorial">
+        <article class="pas-tutorial">
+          <div class="pas-numero">1</div>
+          <div class="pas-icona">🌌</div>
+          <h3>Escolta el Cant de l'Univers</h3>
+          <p>Prem el botó místic per fer sonar la freqüència d'una estrella amagada al cel nocturn.</p>
+        </article>
+        <article class="pas-tutorial">
+          <div class="pas-numero">2</div>
+          <div class="pas-icona">✨</div>
+          <h3>Cerca l'estrella apagada</h3>
+          <p>Identifica la posició correcta al pentagrama còsmic. Cada línia i cada espai amaguen una nota.</p>
+        </article>
+        <article class="pas-tutorial">
+          <div class="pas-numero">3</div>
+          <div class="pas-icona">⭐</div>
+          <h3>Encén-la amb un clic</h3>
+          <p>Si encertes, l'estrella brillarà amb llum pròpia i s'unirà a la constel·lació que estàs creant.</p>
+        </article>
+      </div>
+      <div class="tutorial-extra">
+        <p><span class="dau-extra">☄️ Energia:</span> tens tres cometes. Cada error en consumeix una.</p>
+        <p><span class="dau-extra">🛰️ Progrés:</span> supera un nivell per desbloquejar el següent fins arribar al Mestre de l'Univers.</p>
+      </div>
+      <button class="boto-mistic boto-primari" data-accio="tutorial-fet">
+        <span class="boto-text">Entès!</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- =============================================== -->
+  <!-- PANTALLA 3 — SELECTOR DE NIVELLS -->
+  <!-- =============================================== -->
+  <section id="pantalla-nivells" class="pantalla">
+    <div class="nivells-content">
+      <header class="capçalera-nivells">
+        <button class="boto-tornar boto-tornar-fort" data-accio="tornar-landing">
+          <span class="tornar-fletxa">←</span>
+          <span class="tornar-text">Menú Principal</span>
+        </button>
+        <h2 class="titol-secundari">Mapa Estel·lar</h2>
+        <button class="boto-tornar" data-accio="reset-progres" title="Reiniciar progrés">↺ Reiniciar</button>
+      </header>
+      <p class="instruccio-nivells">Selecciona una constel·lació per afinar</p>
+      <div id="graella-nivells"></div>
+      <div class="llegenda-fases">
+        <div><span class="punt-fase fase-1"></span> Explorador (1–5)</div>
+        <div><span class="punt-fase fase-2"></span> Navegant (6–10)</div>
+        <div><span class="punt-fase fase-3"></span> Astrònom (11–15)</div>
+        <div><span class="punt-fase fase-4"></span> Mestre de l'Univers (16–20)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================== -->
+  <!-- PANTALLA 4 — JOC -->
+  <!-- =============================================== -->
+  <section id="pantalla-joc" class="pantalla">
+    <header class="hud-superior">
+      <button class="boto-tornar" data-accio="tornar-base">⟵ Tornar a la Base</button>
+      <div class="info-nivell">
+        <span class="etiqueta-nivell">Nivell</span>
+        <span id="hud-nivell">1</span>
+        <span class="fase-nivell" id="hud-fase">Explorador</span>
+      </div>
+      <div class="info-energia">
+        <span class="etiqueta-energia">Energia</span>
+        <span id="hud-vides">☄️ ☄️ ☄️</span>
+      </div>
+    </header>
+
+    <main class="joc-area">
+      <aside class="zona-cant">
+        <button id="boto-escoltar" class="boto-cant">
+          <span class="cant-icon">🌌</span>
+          <span class="cant-text">Escoltar el Cant</span>
+          <span class="cant-subtext">de l'Univers</span>
+        </button>
+        <div class="progres-ronda">
+          <span class="ronda-etiqueta">Estrelles afinades</span>
+          <div id="progres-rondes"></div>
+        </div>
+        <div id="missatge-feedback" class="missatge-feedback"></div>
+      </aside>
+
+      <section class="zona-pentagrama">
+        <svg id="pentagrama-svg" viewBox="0 0 800 360" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <radialGradient id="grad-estrella-apagada" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#5a6fa3" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#1a2540" stop-opacity="0.3"/>
+            </radialGradient>
+            <radialGradient id="grad-estrella-encesa" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+              <stop offset="40%" stop-color="#aee2ff" stop-opacity="0.95"/>
+              <stop offset="100%" stop-color="#3a6dc4" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="brillantor-estrella" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="6" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <g id="grup-pentagrama"></g>
+          <g id="grup-constellacio"></g>
+          <g id="grup-estrelles"></g>
+          <g id="grup-noms-notes"></g>
+        </svg>
+      </section>
+    </main>
+
+    <!-- Modal de victòria/derrota -->
+    <div id="modal-final" class="modal-final ocult">
+      <div class="modal-contingut">
+        <h3 id="modal-titol"></h3>
+        <p id="modal-text"></p>
+        <div class="modal-botons">
+          <button class="boto-mistic boto-secundari" data-accio="modal-mapa">Mapa Estel·lar</button>
+          <button class="boto-mistic boto-primari" id="boto-modal-principal"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="game.js"></script>
+</body>
+</html>

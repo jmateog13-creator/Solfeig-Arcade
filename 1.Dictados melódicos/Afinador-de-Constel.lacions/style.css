@@ -1,0 +1,1237 @@
+/* =====================================================
+   L'AFINADOR DE CONSTEL·LACIONS — Estils còsmics
+   ===================================================== */
+
+:root {
+  --color-fons-1: #02030a;
+  --color-fons-2: #060b22;
+  --color-fons-3: #0a1538;
+  --color-nebulosa-1: rgba(95, 60, 180, 0.32);
+  --color-nebulosa-2: rgba(40, 110, 200, 0.28);
+  --color-nebulosa-3: rgba(180, 70, 140, 0.22);
+  --color-pentagrama: rgba(174, 226, 255, 0.18);
+  --color-text: #e8ecff;
+  --color-text-suau: #9aa6d8;
+  --color-accent-or: #ffd76a;
+  --color-accent-blau: #6fb6ff;
+  --color-accent-cristall: #aee2ff;
+  --color-error: #ff4d6d;
+  --font-titol: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-cos: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --transicio-pantalla: 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-cos);
+  color: var(--color-text);
+  background: radial-gradient(ellipse at center,
+              var(--color-fons-3) 0%,
+              var(--color-fons-2) 45%,
+              var(--color-fons-1) 100%);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* =====================================================
+   FONS CÒSMIC
+   ===================================================== */
+
+#cosmos {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nebulosa {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.85;
+  animation: deriva 70s ease-in-out infinite alternate;
+}
+
+.nebulosa-1 {
+  width: 60vmax;
+  height: 60vmax;
+  top: -15%;
+  left: -10%;
+  background: var(--color-nebulosa-1);
+}
+
+.nebulosa-2 {
+  width: 50vmax;
+  height: 50vmax;
+  bottom: -20%;
+  right: -10%;
+  background: var(--color-nebulosa-2);
+  animation-duration: 90s;
+  animation-direction: alternate-reverse;
+}
+
+.nebulosa-3 {
+  width: 40vmax;
+  height: 40vmax;
+  top: 30%;
+  right: 20%;
+  background: var(--color-nebulosa-3);
+  animation-duration: 110s;
+}
+
+@keyframes deriva {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(4vmax, -3vmax) scale(1.05); }
+  100% { transform: translate(-3vmax, 4vmax) scale(0.97); }
+}
+
+#estrelles-fons {
+  position: absolute;
+  inset: 0;
+}
+
+.estrella-fons {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: parpelleig var(--dur, 4s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  opacity: var(--max-opacitat, 0.8);
+}
+
+@keyframes parpelleig {
+  0%, 100% { opacity: calc(var(--max-opacitat, 0.8) * 0.25); }
+  50%      { opacity: var(--max-opacitat, 0.8); }
+}
+
+/* =====================================================
+   PANTALLES — Gestió de visibilitat amb fade
+   ===================================================== */
+
+.pantalla {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: safe center;
+  justify-content: center;
+  padding: clamp(0.8rem, 2.5vmin, 2rem);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity var(--transicio-pantalla),
+              transform var(--transicio-pantalla);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.pantalla.activa {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* =====================================================
+   LANDING
+   ===================================================== */
+
+.landing-content {
+  text-align: center;
+  max-width: 880px;
+  animation: fade-in 1.2s ease;
+}
+
+.titol-principal {
+  font-family: var(--font-titol);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 40px rgba(174, 226, 255, 0.4),
+               0 0 80px rgba(95, 130, 220, 0.25);
+}
+
+.titol-fila-1 {
+  display: block;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  color: var(--color-text-suau);
+  font-style: italic;
+}
+
+.titol-fila-2 {
+  display: block;
+  font-size: clamp(3rem, 8vw, 6rem);
+  background: linear-gradient(135deg, #ffffff 0%, #aee2ff 40%, #6fb6ff 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 20px rgba(110, 180, 255, 0.35));
+}
+
+.subtitol {
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  color: var(--color-text-suau);
+  margin-bottom: 3.5rem;
+  font-style: italic;
+  letter-spacing: 0.03em;
+}
+
+.botons-landing {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.peu-landing {
+  font-size: 0.85rem;
+  color: var(--color-text-suau);
+  opacity: 0.6;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* =====================================================
+   BOTONS MÍSTICS
+   ===================================================== */
+
+.boto-mistic {
+  position: relative;
+  padding: 1rem 2.4rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  border: 1px solid rgba(174, 226, 255, 0.25);
+  background: linear-gradient(135deg,
+              rgba(20, 30, 70, 0.65),
+              rgba(50, 70, 140, 0.5));
+  backdrop-filter: blur(8px);
+  color: var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 0 rgba(174, 226, 255, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.boto-mistic:hover {
+  transform: translateY(-2px);
+  border-color: rgba(174, 226, 255, 0.6);
+  box-shadow: 0 10px 30px -10px rgba(110, 180, 255, 0.5),
+              0 0 30px rgba(174, 226, 255, 0.25),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.boto-mistic:active {
+  transform: translateY(0);
+}
+
+.boto-primari {
+  background: linear-gradient(135deg,
+              rgba(50, 90, 200, 0.85),
+              rgba(110, 80, 200, 0.85));
+  border-color: rgba(174, 226, 255, 0.55);
+  text-shadow: 0 0 12px rgba(174, 226, 255, 0.5);
+}
+
+.boto-icona {
+  font-size: 1.2em;
+}
+
+/* =====================================================
+   TUTORIAL
+   ===================================================== */
+
+.tutorial-content {
+  max-width: 1100px;
+  width: 100%;
+  text-align: center;
+  animation: fade-in 1s ease;
+}
+
+.titol-secundari {
+  font-family: var(--font-titol);
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 2.5rem;
+  color: var(--color-accent-cristall);
+  text-shadow: 0 0 24px rgba(174, 226, 255, 0.35);
+}
+
+.passos-tutorial {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.pas-tutorial {
+  position: relative;
+  padding: 2rem 1.5rem 1.5rem;
+  border-radius: 18px;
+  background: linear-gradient(180deg,
+              rgba(20, 30, 70, 0.55),
+              rgba(10, 20, 50, 0.35));
+  border: 1px solid rgba(174, 226, 255, 0.18);
+  backdrop-filter: blur(8px);
+  text-align: left;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.pas-tutorial:hover {
+  transform: translateY(-4px);
+  border-color: rgba(174, 226, 255, 0.45);
+}
+
+.pas-numero {
+  position: absolute;
+  top: -16px;
+  left: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6fb6ff, #b478ff);
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 0 18px rgba(110, 180, 255, 0.6);
+}
+
+.pas-icona {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+  filter: drop-shadow(0 0 12px rgba(174, 226, 255, 0.4));
+}
+
+.pas-tutorial h3 {
+  font-family: var(--font-titol);
+  font-weight: 500;
+  font-size: 1.35rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-accent-cristall);
+}
+
+.pas-tutorial p {
+  color: var(--color-text-suau);
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+.tutorial-extra {
+  background: rgba(10, 20, 50, 0.4);
+  border: 1px dashed rgba(174, 226, 255, 0.25);
+  border-radius: 14px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: left;
+  color: var(--color-text-suau);
+}
+
+.dau-extra {
+  color: var(--color-accent-cristall);
+  font-weight: 600;
+  margin-right: 0.4rem;
+}
+
+/* =====================================================
+   SELECTOR DE NIVELLS
+   ===================================================== */
+
+#pantalla-nivells {
+  align-items: stretch;
+  padding: 1.2rem 2rem;
+}
+
+.nivells-content {
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  animation: fade-in 1s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.capçalera-nivells {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0.8rem;
+  gap: 1rem;
+}
+
+.boto-tornar {
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(174, 226, 255, 0.22);
+  background: rgba(10, 20, 50, 0.5);
+  color: var(--color-text-suau);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.boto-tornar:hover {
+  color: var(--color-text);
+  border-color: rgba(174, 226, 255, 0.5);
+  background: rgba(30, 50, 100, 0.5);
+}
+
+/* Botó Menú Principal — més prominent */
+.boto-tornar-fort {
+  padding: 0.7rem 1.3rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text);
+  background: linear-gradient(135deg,
+              rgba(50, 90, 200, 0.55),
+              rgba(110, 80, 200, 0.45));
+  border-color: rgba(174, 226, 255, 0.45);
+  box-shadow: 0 4px 20px -6px rgba(110, 180, 255, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.boto-tornar-fort:hover {
+  transform: translateX(-2px);
+  box-shadow: 0 6px 26px -6px rgba(110, 180, 255, 0.6),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.boto-tornar-fort .tornar-fletxa {
+  font-size: 1.1em;
+  transition: transform 0.25s ease;
+}
+
+.boto-tornar-fort:hover .tornar-fletxa {
+  transform: translateX(-3px);
+}
+
+.instruccio-nivells {
+  color: var(--color-text-suau);
+  margin-bottom: 2rem;
+  font-style: italic;
+  letter-spacing: 0.03em;
+}
+
+#graella-nivells {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 720px) {
+  #graella-nivells {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.boto-nivell {
+  position: relative;
+  aspect-ratio: 1.3;
+  min-height: 100px;
+  border-radius: 18px;
+  border: 1px solid rgba(174, 226, 255, 0.25);
+  background: linear-gradient(160deg,
+              rgba(20, 30, 70, 0.65),
+              rgba(10, 20, 50, 0.45));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.7rem 0.5rem;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.boto-nivell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-fase, transparent);
+  opacity: 0.18;
+  z-index: -2;
+  transition: opacity 0.3s ease;
+}
+
+.boto-nivell.fase-1 { --color-fase: linear-gradient(135deg, #6fb6ff, #4a8fcf); }
+.boto-nivell.fase-2 { --color-fase: linear-gradient(135deg, #a78bff, #6f4fcf); }
+.boto-nivell.fase-3 { --color-fase: linear-gradient(135deg, #ff8bd1, #cf4f9f); }
+.boto-nivell.fase-4 { --color-fase: linear-gradient(135deg, #ffd76a, #ff8b3d); }
+
+/* Halo radial que apareix en passar per damunt */
+.nivell-halo {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 50%,
+              rgba(174, 226, 255, 0.35) 0%,
+              transparent 70%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+/* Petites estrelles decoratives dins de la rajola */
+.nivell-estrelleta {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+  animation: brillet 2.6s ease-in-out infinite;
+  animation-delay: var(--retard, 0s);
+}
+
+@keyframes brillet {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50%      { opacity: 0.9; transform: scale(1.3); }
+}
+
+.boto-nivell.desbloquejat:hover {
+  transform: translateY(-4px) scale(1.025);
+  border-color: rgba(174, 226, 255, 0.8);
+  box-shadow: 0 14px 40px -10px rgba(110, 180, 255, 0.6),
+              0 0 40px rgba(174, 226, 255, 0.3);
+}
+
+.boto-nivell.desbloquejat:hover::before {
+  opacity: 0.32;
+}
+
+.boto-nivell.desbloquejat:hover .nivell-halo {
+  opacity: 1;
+}
+
+.boto-nivell.desbloquejat:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.boto-nivell .nivell-num {
+  font-family: var(--font-titol);
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.boto-nivell .nivell-desc {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-suau);
+  margin-top: 0.15rem;
+}
+
+.boto-nivell .nivell-icona {
+  font-size: 1.05rem;
+  margin-top: 0.2rem;
+  filter: drop-shadow(0 0 8px rgba(174, 226, 255, 0.5));
+  transition: transform 0.3s ease;
+}
+
+.boto-nivell.desbloquejat:hover .nivell-icona {
+  transform: scale(1.2) rotate(8deg);
+}
+
+.boto-nivell .nivell-fase-nom {
+  font-family: var(--font-titol);
+  font-style: italic;
+  font-size: 0.72rem;
+  color: var(--color-accent-cristall);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  margin-top: 0.1rem;
+}
+
+.boto-nivell.desbloquejat:hover .nivell-fase-nom {
+  opacity: 0.95;
+  transform: translateY(0);
+}
+
+.boto-nivell.bloquejat {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.boto-nivell.bloquejat .nivell-num {
+  color: var(--color-text-suau);
+}
+
+.boto-nivell.bloquejat .nivell-desc {
+  opacity: 0.5;
+}
+
+.boto-nivell.completat .nivell-icona {
+  color: var(--color-accent-or);
+  text-shadow: 0 0 14px rgba(255, 215, 106, 0.6);
+}
+
+.llegenda-fases {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: var(--color-text-suau);
+}
+
+.llegenda-fases > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.punt-fase {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.punt-fase.fase-1 { background: linear-gradient(135deg, #6fb6ff, #4a8fcf); }
+.punt-fase.fase-2 { background: linear-gradient(135deg, #a78bff, #6f4fcf); }
+.punt-fase.fase-3 { background: linear-gradient(135deg, #ff8bd1, #cf4f9f); }
+.punt-fase.fase-4 { background: linear-gradient(135deg, #ffd76a, #ff8b3d); }
+
+/* =====================================================
+   PANTALLA DE JOC
+   ===================================================== */
+
+#pantalla-joc {
+  flex-direction: column;
+  padding: clamp(0.7rem, 1.5vmin, 1.2rem) clamp(0.8rem, 2vmin, 2rem)
+           clamp(0.8rem, 2vmin, 2rem);
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.hud-superior {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(0.5rem, 1.5vmin, 1rem);
+  padding: clamp(0.55rem, 1.2vmin, 0.8rem) clamp(0.7rem, 2vmin, 1.2rem);
+  border-radius: 14px;
+  background: linear-gradient(180deg,
+              rgba(20, 30, 70, 0.55),
+              rgba(10, 20, 50, 0.35));
+  border: 1px solid rgba(174, 226, 255, 0.2);
+  backdrop-filter: blur(8px);
+  flex-wrap: wrap;
+}
+
+.info-nivell, .info-energia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  line-height: 1;
+}
+
+.info-nivell {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.etiqueta-nivell, .etiqueta-energia {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-suau);
+}
+
+#hud-nivell {
+  font-family: var(--font-titol);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-accent-cristall);
+}
+
+.fase-nivell {
+  font-size: 0.85rem;
+  color: var(--color-text-suau);
+  font-style: italic;
+}
+
+#hud-vides {
+  font-size: 1.3rem;
+  letter-spacing: 0.15em;
+  filter: drop-shadow(0 0 8px rgba(255, 200, 100, 0.5));
+}
+
+#hud-vides.perd {
+  animation: vibrar 0.4s ease;
+}
+
+@keyframes vibrar {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}
+
+.joc-area {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 3fr;
+  gap: clamp(0.8rem, 2vmin, 1.5rem);
+  margin-top: clamp(0.8rem, 1.5vmin, 1.2rem);
+  min-height: 0;
+}
+
+.zona-cant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.8rem, 2vmin, 1.5rem);
+  padding: clamp(0.8rem, 2vmin, 1.5rem);
+  border-radius: 18px;
+  background: linear-gradient(180deg,
+              rgba(20, 30, 70, 0.45),
+              rgba(10, 20, 50, 0.3));
+  border: 1px solid rgba(174, 226, 255, 0.18);
+  backdrop-filter: blur(8px);
+  justify-content: center;
+}
+
+.boto-cant {
+  width: clamp(140px, 22vmin, 220px);
+  height: clamp(140px, 22vmin, 220px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%,
+              #5a8dff 0%,
+              #2c4ba8 45%,
+              #16224a 100%);
+  border: 2px solid rgba(174, 226, 255, 0.5);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  text-align: center;
+  font-family: var(--font-titol);
+  box-shadow: 0 0 60px rgba(95, 145, 255, 0.5),
+              inset 0 0 40px rgba(174, 226, 255, 0.2),
+              inset 0 -10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  animation: pulse-cant 4s ease-in-out infinite;
+}
+
+.boto-cant:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 80px rgba(95, 145, 255, 0.7),
+              inset 0 0 50px rgba(174, 226, 255, 0.3),
+              inset 0 -10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.boto-cant:active {
+  transform: scale(0.97);
+}
+
+.boto-cant.sonant {
+  animation: ona-cant 1.2s ease-out;
+}
+
+@keyframes pulse-cant {
+  0%, 100% { box-shadow: 0 0 60px rgba(95, 145, 255, 0.5),
+                         inset 0 0 40px rgba(174, 226, 255, 0.2),
+                         inset 0 -10px 30px rgba(0, 0, 0, 0.4); }
+  50%      { box-shadow: 0 0 90px rgba(95, 145, 255, 0.7),
+                         inset 0 0 50px rgba(174, 226, 255, 0.35),
+                         inset 0 -10px 30px rgba(0, 0, 0, 0.4); }
+}
+
+@keyframes ona-cant {
+  0%   { box-shadow: 0 0 0 0 rgba(174, 226, 255, 0.7),
+                     inset 0 0 50px rgba(174, 226, 255, 0.35); }
+  100% { box-shadow: 0 0 0 80px rgba(174, 226, 255, 0),
+                     inset 0 0 50px rgba(174, 226, 255, 0.35); }
+}
+
+.cant-icon {
+  font-size: clamp(1.8rem, 5vmin, 2.6rem);
+  filter: drop-shadow(0 0 14px rgba(174, 226, 255, 0.6));
+}
+
+.cant-text {
+  font-size: clamp(0.85rem, 2vmin, 1.1rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.cant-subtext {
+  font-size: clamp(0.7rem, 1.5vmin, 0.85rem);
+  color: var(--color-text-suau);
+  font-style: italic;
+}
+
+.progres-ronda {
+  text-align: center;
+}
+
+.ronda-etiqueta {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-suau);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+#progres-rondes {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.bombolla-ronda {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(174, 226, 255, 0.15);
+  border: 1px solid rgba(174, 226, 255, 0.3);
+  transition: all 0.4s ease;
+}
+
+.bombolla-ronda.completa {
+  background: radial-gradient(circle, #ffffff 0%, #aee2ff 50%, transparent 100%);
+  border-color: transparent;
+  box-shadow: 0 0 14px rgba(174, 226, 255, 0.7);
+}
+
+.missatge-feedback {
+  min-height: 1.6em;
+  font-size: 1rem;
+  text-align: center;
+  font-style: italic;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.missatge-feedback.actiu {
+  opacity: 1;
+}
+
+.missatge-feedback.encert { color: var(--color-accent-cristall); }
+.missatge-feedback.error  { color: var(--color-error); }
+
+.zona-pentagrama {
+  border-radius: 18px;
+  padding: clamp(0.6rem, 2vmin, 1.5rem);
+  background: linear-gradient(180deg,
+              rgba(10, 20, 50, 0.45),
+              rgba(5, 10, 30, 0.35));
+  border: 1px solid rgba(174, 226, 255, 0.18);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+}
+
+#pentagrama-svg {
+  width: 100%;
+  height: 100%;
+  max-height: 70vh;
+}
+
+/* Línies del pentagrama com a pols còsmica */
+.linia-pentagrama {
+  stroke: var(--color-pentagrama);
+  stroke-width: 1;
+  stroke-dasharray: 1 0;
+  filter: drop-shadow(0 0 4px rgba(174, 226, 255, 0.2));
+}
+
+.linia-suplementaria {
+  stroke: var(--color-pentagrama);
+  stroke-width: 1;
+  opacity: 0.5;
+}
+
+/* Clau de Sol còsmica */
+.clau-sol {
+  font-family: 'Bravura', 'Apple Symbols', 'Segoe UI Symbol',
+               'Noto Music', 'Noto Sans Symbols2', 'DejaVu Sans', serif;
+  font-size: 195px;
+  fill: rgba(174, 226, 255, 0.78);
+  pointer-events: none;
+  filter: drop-shadow(0 0 14px rgba(110, 180, 255, 0.45))
+          drop-shadow(0 0 4px rgba(174, 226, 255, 0.6));
+  animation: clau-respira 5s ease-in-out infinite;
+}
+
+@keyframes clau-respira {
+  0%, 100% { fill-opacity: 0.78; }
+  50%      { fill-opacity: 0.92; }
+}
+
+/* Estrelles */
+.estrella-grup {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.estrella-grup:hover .estrella-aurea {
+  opacity: 0.7;
+}
+
+.estrella-grup:hover .estrella-cos {
+  fill: #6f8cd0;
+}
+
+.estrella-cos {
+  fill: url(#grad-estrella-apagada);
+  stroke: rgba(174, 226, 255, 0.4);
+  stroke-width: 0.8;
+  transition: all 0.4s ease;
+}
+
+.estrella-aurea {
+  fill: url(#grad-estrella-encesa);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.estrella-grup.encesa .estrella-cos {
+  fill: #ffffff;
+  stroke: rgba(174, 226, 255, 0.9);
+  stroke-width: 1.2;
+  filter: url(#brillantor-estrella);
+}
+
+.estrella-grup.encesa .estrella-aurea {
+  opacity: 1;
+}
+
+.estrella-grup.encesa {
+  animation: encendre 0.8s ease;
+}
+
+@keyframes encendre {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.6); }
+  100% { transform: scale(1); }
+}
+
+.estrella-grup.error .estrella-cos {
+  fill: var(--color-error);
+  stroke: var(--color-error);
+}
+
+.estrella-grup.error {
+  animation: parpelleig-error 0.6s ease;
+}
+
+@keyframes parpelleig-error {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  25% { transform: scale(1.15); opacity: 0.6; }
+  50% { transform: scale(0.95); opacity: 1; }
+  75% { transform: scale(1.1); opacity: 0.7; }
+}
+
+.estrella-grup.objectiu .estrella-cos {
+  animation: pulse-objectiu 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-objectiu {
+  0%, 100% { stroke-opacity: 0.4; }
+  50%      { stroke-opacity: 0.9; }
+}
+
+.estrella-grup.bloquejada {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* Constel·lació */
+.linia-constellacio {
+  stroke: rgba(174, 226, 255, 0.55);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+  fill: none;
+  filter: drop-shadow(0 0 6px rgba(174, 226, 255, 0.4));
+  animation: traçar 0.9s ease forwards;
+}
+
+@keyframes traçar {
+  from { stroke-dashoffset: 200; opacity: 0; }
+  to   { stroke-dashoffset: 0; opacity: 1; }
+}
+
+/* Nom de la nota */
+.nom-nota {
+  font-family: var(--font-titol);
+  font-size: 14px;
+  fill: var(--color-accent-cristall);
+  text-anchor: middle;
+  font-style: italic;
+  text-shadow: 0 0 8px rgba(174, 226, 255, 0.6);
+  pointer-events: none;
+  animation: aparèixer-nom 1.8s ease forwards;
+}
+
+@keyframes aparèixer-nom {
+  0%   { opacity: 0; transform: translateY(8px); }
+  20%  { opacity: 1; transform: translateY(0); }
+  80%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* =====================================================
+   MODAL FINAL
+   ===================================================== */
+
+.modal-final {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 3, 10, 0.7);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  animation: fade-in 0.4s ease;
+}
+
+.modal-final.ocult {
+  display: none;
+}
+
+.modal-contingut {
+  max-width: 460px;
+  padding: 2.5rem;
+  border-radius: 22px;
+  background: linear-gradient(180deg,
+              rgba(30, 40, 90, 0.85),
+              rgba(15, 25, 60, 0.85));
+  border: 1px solid rgba(174, 226, 255, 0.4);
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5),
+              0 0 50px rgba(110, 180, 255, 0.25);
+}
+
+.modal-contingut h3 {
+  font-family: var(--font-titol);
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+  color: var(--color-accent-cristall);
+}
+
+.modal-contingut p {
+  color: var(--color-text-suau);
+  margin-bottom: 1.8rem;
+  line-height: 1.55;
+}
+
+.modal-botons {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================================================
+   ADAPTACIONS RESPONSIVES — TOTES LES PANTALLES
+   ===================================================== */
+
+/* ---- Pantalles amples (≥ 1400px): no estirar massa ---- */
+@media (min-width: 1400px) {
+  .nivells-content,
+  .tutorial-content { max-width: 1200px; }
+}
+
+/* ---- Tablets i portàtils petits (≤ 1100px) ---- */
+@media (max-width: 1100px) {
+  .joc-area {
+    grid-template-columns: minmax(180px, 1fr) 2.5fr;
+  }
+  .boto-cant {
+    width: clamp(130px, 20vmin, 180px);
+    height: clamp(130px, 20vmin, 180px);
+  }
+}
+
+/* ---- Punt clau d'apilat: cant a sobre, pentagrama a sota (≤ 900px) ---- */
+@media (max-width: 900px) {
+  .joc-area {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .zona-cant {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+  }
+  .boto-cant {
+    width: clamp(120px, 28vmin, 160px);
+    height: clamp(120px, 28vmin, 160px);
+  }
+  .progres-ronda { flex: 1 1 140px; }
+  .missatge-feedback { flex: 1 1 100%; min-height: 1.2em; }
+  .zona-pentagrama { min-height: 220px; }
+}
+
+/* ---- Mòbils grans (≤ 720px) ---- */
+@media (max-width: 720px) {
+  .titol-fila-1 { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+  .titol-fila-2 { font-size: clamp(2.4rem, 11vw, 4rem); }
+  .subtitol     { margin-bottom: 2rem; font-size: 0.95rem; }
+  .botons-landing { gap: 0.8rem; flex-direction: column; }
+  .boto-mistic { padding: 0.9rem 1.8rem; font-size: 1rem; }
+
+  .titol-secundari { font-size: clamp(1.5rem, 5vw, 2.2rem); margin-bottom: 1.5rem; }
+
+  .passos-tutorial {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+  .pas-tutorial { padding: 1.4rem 1.1rem 1.1rem; }
+  .pas-tutorial h3 { font-size: 1.15rem; }
+  .pas-tutorial p { font-size: 0.88rem; }
+  .tutorial-extra { padding: 0.9rem 1rem; font-size: 0.85rem; }
+
+  .capçalera-nivells { gap: 0.5rem; }
+  .boto-tornar-fort .tornar-text { display: none; } /* només la fletxa en mòbil */
+  .boto-tornar-fort { padding: 0.6rem 0.8rem; }
+  .boto-tornar { padding: 0.5rem 0.8rem; font-size: 0.8rem; }
+  .titol-secundari { font-size: 1.4rem; }
+  .instruccio-nivells { margin-bottom: 1rem; font-size: 0.85rem; }
+  #graella-nivells { gap: 0.7rem; }
+
+  .hud-superior {
+    padding: 0.5rem 0.7rem;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+  }
+  #hud-nivell { font-size: 1.25rem; }
+  .fase-nivell { font-size: 0.7rem; }
+  #hud-vides { font-size: 1rem; letter-spacing: 0.1em; }
+  .etiqueta-nivell, .etiqueta-energia { font-size: 0.6rem; }
+  .info-nivell { gap: 0.35rem; }
+
+  .llegenda-fases { font-size: 0.75rem; gap: 0.6rem 1.2rem; }
+}
+
+/* ---- Mòbils mitjans (≤ 540px) ---- */
+@media (max-width: 540px) {
+  #graella-nivells {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+  .boto-nivell {
+    aspect-ratio: 1.15;
+    min-height: 84px;
+    padding: 0.5rem 0.3rem;
+  }
+  .boto-nivell .nivell-num { font-size: 1.4rem; }
+  .boto-nivell .nivell-desc { font-size: 0.55rem; }
+  .boto-nivell .nivell-icona { font-size: 0.9rem; }
+  .boto-nivell .nivell-fase-nom { display: none; }
+
+  .modal-contingut { padding: 1.6rem 1.4rem; }
+  .modal-contingut h3 { font-size: 1.5rem; }
+  .modal-contingut p { font-size: 0.9rem; margin-bottom: 1.2rem; }
+
+  .zona-pentagrama { min-height: 180px; }
+}
+
+/* ---- Mòbils petits (≤ 380px) ---- */
+@media (max-width: 380px) {
+  #graella-nivells {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pas-numero { width: 30px; height: 30px; font-size: 0.85rem; }
+  .pas-icona { font-size: 2rem; }
+}
+
+/* ---- Orientació horitzontal en mòbils baixos ---- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .pantalla { padding: 0.5rem 1rem; }
+  .titol-principal { margin-bottom: 0.8rem; }
+  .subtitol { margin-bottom: 1.2rem; }
+  .botons-landing { flex-direction: row; margin-bottom: 1rem; }
+  .peu-landing { font-size: 0.7rem; }
+
+  .joc-area {
+    grid-template-columns: minmax(160px, 1fr) 3fr;
+    grid-template-rows: 1fr;
+  }
+  .zona-cant {
+    flex-direction: column;
+    padding: 0.7rem;
+    gap: 0.6rem;
+  }
+  .boto-cant {
+    width: clamp(90px, 22vmin, 130px);
+    height: clamp(90px, 22vmin, 130px);
+  }
+  .cant-icon { font-size: 1.4rem; }
+  .cant-text { font-size: 0.8rem; }
+  .cant-subtext { display: none; }
+
+  .hud-superior { padding: 0.4rem 0.7rem; font-size: 0.78rem; }
+  #hud-nivell { font-size: 1.1rem; }
+  .zona-pentagrama { min-height: 180px; }
+
+  .passos-tutorial { grid-template-columns: repeat(3, 1fr); }
+  .pas-tutorial { padding: 1rem 0.8rem 0.8rem; }
+  .pas-icona { font-size: 1.4rem; margin-bottom: 0.3rem; }
+  .pas-tutorial h3 { font-size: 0.95rem; }
+  .pas-tutorial p { font-size: 0.78rem; }
+  .tutorial-extra { display: none; }
+}

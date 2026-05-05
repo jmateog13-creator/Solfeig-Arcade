@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#04020e">
+    <title>INVASIÓ GALÀCTICA DE NOTES</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============== PANTALLA 1: LANDING ============== -->
+<section id="screen-landing" class="screen active">
+    <canvas id="bg-canvas"></canvas>
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+    <div class="landing-content">
+        <div class="logo-wrap">
+            <h1 class="neon-title cyan reveal-1" data-text="INVASIÓ">INVASIÓ</h1>
+            <h1 class="neon-title pink reveal-2" data-text="GALÀCTICA">GALÀCTICA</h1>
+            <p class="subtitle reveal-3">— DE NOTES —</p>
+        </div>
+        <div class="menu-buttons reveal-4">
+            <button class="neon-btn primary" data-action="play">▶ DEFENSAR LA TERRA</button>
+            <button class="neon-btn secondary" data-action="tutorial">📖 MANUAL DE COMBAT</button>
+            <button class="neon-btn ghost" data-action="dashboard">📊 ESTADÍSTIQUES</button>
+            <button class="neon-btn ghost" data-action="settings">⚙ CONFIGURACIÓ</button>
+        </div>
+        <p class="footer-hint reveal-5">Serious Game per dominar la lectura musical</p>
+    </div>
+</section>
+
+<!-- ============== PANTALLA 2: TUTORIAL ============== -->
+<section id="screen-tutorial" class="screen">
+    <canvas class="bg-canvas-shared"></canvas>
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+    <div class="scrollable-content">
+        <h2 class="section-title">📖 MANUAL DE COMBAT</h2>
+        <div class="card">
+            <div class="tut-row"><span class="icon">👽</span><p>Les naus alienígenes són <b>notes musicals</b> al pentagrama. Apareixen a dalt i descendeixen cap a la base.</p></div>
+            <div class="tut-row"><span class="icon">🎯</span><p>Identifica cada nota i prem el botó corresponent (<b>DO RE MI FA SOL LA SI</b>) per activar el canó.</p></div>
+            <div class="tut-row"><span class="icon">⛓</span><p><b>Cadena de combo:</b> encerts seguits multipliquen punts (×2, ×3, ×5, ×10). Fallar trenca la cadena.</p></div>
+            <div class="tut-row"><span class="icon">💎</span><p><b>Power-ups</b> apareixen aleatòriament: 💣 bomba, 🛡 escut, ⏱ alentir.</p></div>
+            <div class="tut-row"><span class="icon">👹</span><p>Cada 5 sectors apareix un <b>BOSS</b> amb múltiples notes a vèncer.</p></div>
+            <div class="tut-row"><span class="icon">⭐</span><p>Cada sector té fins a <b>3 estrelles</b> (precisió + supervivència).</p></div>
+            <p class="demo-label">Exemples de notes al pentagrama:</p>
+            <canvas id="tutorial-canvas" width="700" height="220"></canvas>
+            <p class="kbd-hint">Teclat: <kbd>1</kbd>-<kbd>7</kbd> · <kbd>ESC</kbd> pausa · <kbd>SPACE</kbd> activar power-up</p>
+        </div>
+        <button class="neon-btn primary" data-action="back-landing">⬅ TORNAR</button>
+    </div>
+</section>
+
+<!-- ============== PANTALLA 3: SELECTOR DE SECTORS ============== -->
+<section id="screen-levels" class="screen">
+    <canvas class="bg-canvas-shared"></canvas>
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+    <div class="scrollable-content">
+        <h2 class="section-title">🌌 SELECTOR DE SECTORS</h2>
+        <p class="section-subtitle">Domina cada sector per desbloquejar el següent</p>
+        <div id="levels-grid" class="levels-grid"></div>
+        <div id="cosmic-card" class="cosmic-card locked">
+            <div class="cosmic-icon">∞</div>
+            <h3>SECTOR CÒSMIC</h3>
+            <p class="cosmic-desc">Supervivència infinita · acceleració constant</p>
+            <p id="cosmic-record" class="cosmic-record">Rècord: —</p>
+            <p class="cosmic-lock">🔒 Supera els 20 sectors</p>
+        </div>
+        <button class="neon-btn primary" data-action="back-landing">⬅ TORNAR</button>
+    </div>
+</section>
+
+<!-- ============== PANTALLA 4: DASHBOARD MESTRIA ============== -->
+<section id="screen-dashboard" class="screen">
+    <canvas class="bg-canvas-shared"></canvas>
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+    <div class="scrollable-content">
+        <h2 class="section-title">📊 PROGRÉS DE MESTRIA</h2>
+        <p class="section-subtitle">El teu domini de cada nota</p>
+        <div class="card">
+            <div id="mastery-bars"></div>
+            <div class="stats-row">
+                <div class="stat-block">
+                    <span class="stat-label">SECTOR ACTUAL</span>
+                    <span id="stat-progress" class="stat-value">1/20</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">PRECISIÓ MITJANA</span>
+                    <span id="stat-accuracy" class="stat-value">—</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">RÈCORD CÒSMIC</span>
+                    <span id="stat-cosmic" class="stat-value">—</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">★ TOTAL</span>
+                    <span id="stat-stars" class="stat-value">0</span>
+                </div>
+            </div>
+        </div>
+        <button class="neon-btn ghost danger" data-action="reset-progress">🗑 ESBORRAR PROGRÉS</button>
+        <button class="neon-btn primary" data-action="back-landing">⬅ TORNAR</button>
+    </div>
+</section>
+
+<!-- ============== PANTALLA 5: CONFIGURACIÓ ============== -->
+<section id="screen-settings" class="screen">
+    <canvas class="bg-canvas-shared"></canvas>
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+    <div class="scrollable-content">
+        <h2 class="section-title">⚙ CONFIGURACIÓ</h2>
+        <div class="card">
+            <div class="setting-row">
+                <label>Volum música</label>
+                <input type="range" id="setting-music" min="0" max="100" value="60">
+            </div>
+            <div class="setting-row">
+                <label>Volum efectes</label>
+                <input type="range" id="setting-sfx" min="0" max="100" value="80">
+            </div>
+            <div class="setting-row">
+                <label>Mode daltònic (formes per nota)</label>
+                <input type="checkbox" id="setting-colorblind">
+            </div>
+            <div class="setting-row">
+                <label>Reduir efectes (per ordinadors lents)</label>
+                <input type="checkbox" id="setting-reduce-fx">
+            </div>
+            <div class="setting-row">
+                <label>Mostrar nom de la nota damunt la nau (assistència)</label>
+                <input type="checkbox" id="setting-helper-labels">
+            </div>
+        </div>
+        <button class="neon-btn primary" data-action="back-landing">⬅ TORNAR</button>
+    </div>
+</section>
+
+<!-- ============== PANTALLA 6: GAMEPLAY ============== -->
+<section id="screen-gameplay" class="screen">
+    <canvas id="game-canvas"></canvas>
+    <canvas id="post-canvas"></canvas>
+
+    <div id="hud">
+        <div class="hud-block">
+            <span class="hud-label">SECTOR</span>
+            <span id="hud-level" class="hud-value">01</span>
+        </div>
+        <div class="hud-block">
+            <span class="hud-label">SINCRONITZACIÓ</span>
+            <span id="hud-score" class="hud-value">0</span>
+        </div>
+        <div class="hud-block combo-block">
+            <span class="hud-label">CADENA</span>
+            <span id="hud-combo" class="hud-value">×1</span>
+        </div>
+        <div class="hud-block">
+            <span class="hud-label">INTEGRITAT</span>
+            <span id="hud-lives" class="hud-value">🚀🚀🚀</span>
+        </div>
+        <div class="hud-block powerup-block">
+            <span class="hud-label">POWER-UP</span>
+            <span id="hud-powerup" class="hud-value">—</span>
+        </div>
+        <button id="hud-pause" class="hud-btn">⏸</button>
+    </div>
+
+    <div id="controls">
+        <button class="note-btn" data-note="DO" style="--c:#ff3366"><span>DO</span></button>
+        <button class="note-btn" data-note="RE" style="--c:#ff8833"><span>RE</span></button>
+        <button class="note-btn" data-note="MI" style="--c:#ffee33"><span>MI</span></button>
+        <button class="note-btn" data-note="FA" style="--c:#33ff77"><span>FA</span></button>
+        <button class="note-btn" data-note="SOL" style="--c:#33ddff"><span>SOL</span></button>
+        <button class="note-btn" data-note="LA" style="--c:#7733ff"><span>LA</span></button>
+        <button class="note-btn" data-note="SI" style="--c:#ff33dd"><span>SI</span></button>
+        <button id="powerup-btn" class="powerup-action">SPACE<br><span>POWER-UP</span></button>
+    </div>
+
+    <!-- Cinemàtica d'inici de sector -->
+    <div id="cinematic-overlay" class="overlay hidden">
+        <div class="cinematic-content">
+            <div class="cinematic-eyebrow" id="cin-tier">— INICIACIÓ —</div>
+            <div class="cinematic-sector" id="cin-sector">SECTOR 01</div>
+            <div class="cinematic-line"></div>
+            <div class="cinematic-mission" id="cin-mission">"Identifica les primeres notes"</div>
+        </div>
+    </div>
+
+    <!-- Pausa -->
+    <div id="pause-overlay" class="overlay hidden">
+        <div class="overlay-card">
+            <h2 class="neon-title small cyan" data-text="PAUSA">PAUSA</h2>
+            <button class="neon-btn primary" data-action="resume">▶ CONTINUAR</button>
+            <button class="neon-btn secondary" data-action="quit">🏠 SORTIR</button>
+        </div>
+    </div>
+
+    <!-- Game Over -->
+    <div id="gameover-overlay" class="overlay hidden">
+        <div class="overlay-card">
+            <h2 class="neon-title small pink" data-text="DERROTA">DERROTA</h2>
+            <p class="overlay-text">La formació enemiga ha aterrat</p>
+            <p class="overlay-stat">Sincronització: <span id="gameover-score">0</span></p>
+            <p class="overlay-stat">Cadena màxima: <span id="gameover-combo">×1</span></p>
+            <button class="neon-btn primary" data-action="retry">🔄 REINTENTAR</button>
+            <button class="neon-btn secondary" data-action="quit">🏠 SORTIR</button>
+        </div>
+    </div>
+
+    <!-- Victòria -->
+    <div id="victory-overlay" class="overlay hidden">
+        <div class="overlay-card">
+            <h2 class="neon-title small cyan" data-text="VICTÒRIA">VICTÒRIA</h2>
+            <div id="victory-stars" class="stars-row">★★★</div>
+            <p class="overlay-stat">Sincronització: <span id="victory-score">0</span></p>
+            <p class="overlay-stat">Precisió: <span id="victory-accuracy">0%</span></p>
+            <p class="overlay-stat">Cadena màxima: <span id="victory-combo">×1</span></p>
+            <button class="neon-btn primary" data-action="next">➡ SEGÜENT SECTOR</button>
+            <button class="neon-btn secondary" data-action="quit">🏠 SORTIR</button>
+        </div>
+    </div>
+
+    <!-- Toast d'achievement / power-up -->
+    <div id="toast"></div>
+</section>
+
+<script src="game.js"></script>
+</body>
+</html>

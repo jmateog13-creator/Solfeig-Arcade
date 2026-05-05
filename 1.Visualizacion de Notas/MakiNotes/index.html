@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAKI-NOTES · Neo-Tokyo Rush</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ====== FONS REAL · bar de sushi ciberpunk ====== -->
+  <div id="bar-bg" class="bar-bg"></div>
+  <div id="bar-vignette" class="bar-vignette"></div>
+
+  <canvas id="rain"></canvas>
+  <div id="scanlines"></div>
+  <div id="vapor"></div>
+
+  <!-- ====== BOOT SEQUENCE ====== -->
+  <section id="boot" class="boot active">
+    <div class="boot-inner">
+      <div class="boot-logo">寿司</div>
+      <h1 class="boot-title">MAKI-NOTES OS</h1>
+      <div class="boot-version">v1.0 · NEO-TOKYO RUSH</div>
+      <div class="boot-bar"><div class="boot-fill" id="boot-fill"></div></div>
+      <pre class="boot-log" id="boot-log"></pre>
+      <div class="boot-skip">[ click per saltar ]</div>
+    </div>
+  </section>
+
+  <!-- ====== BOTÓ CONFIG GLOBAL ====== -->
+  <button id="cog-btn" class="cog-btn" title="Configuració">⚙</button>
+
+  <!-- ====== ACHIEVEMENT TOAST ====== -->
+  <div id="ach-toast" class="ach-toast"></div>
+
+  <!-- ======================================================== -->
+  <!-- PANTALLA 1 · LANDING                                      -->
+  <!-- ======================================================== -->
+  <section id="screen-landing" class="screen active">
+    <div class="landing-wrap">
+      <div class="kanji-floater">寿司</div>
+      <h1 class="title-neon" data-text="MAKI-NOTES">
+        <span class="t-shadow">MAKI-NOTES</span>
+        <span class="t-front">MAKI-NOTES</span>
+      </h1>
+      <p class="subtitle">NEO-TOKYO RUSH · エディション</p>
+      <p class="tagline">Cuina · Sushi · Solfeig</p>
+
+      <div class="cta">
+        <button class="btn btn-primary magnetic" data-go="levels">
+          <span class="btn-icon">▶</span>
+          <span class="btn-label">ENTRAR A LA CUINA</span>
+        </button>
+        <button class="btn btn-secondary magnetic" data-go="tutorial">
+          <span class="btn-icon">📖</span>
+          <span class="btn-label">RECEPTARI · TUTORIAL</span>
+        </button>
+      </div>
+
+      <footer class="landing-footer">
+        <span>v1.0</span>
+        <span class="blink">●</span>
+        <span>SISTEMA EN LÍNIA</span>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- PANTALLA 2 · TUTORIAL INTERACTIU                          -->
+  <!-- ======================================================== -->
+  <section id="screen-tutorial" class="screen">
+    <div class="panel glass tut-panel">
+      <header class="panel-head">
+        <h2>📖 RECEPTARI INTERACTIU</h2>
+        <div class="tut-controls">
+          <span id="tut-step-label" class="tut-step-label">PAS 1 / 8</span>
+          <button class="btn-ghost" id="tut-skip">SALTAR ↦</button>
+          <button class="btn-ghost" data-go="landing">← Sortir</button>
+        </div>
+      </header>
+
+      <div class="tut-room">
+        <div class="tut-chef-side">
+          <div class="tut-chef-wrap">
+            <div class="chef-aura tut-aura"></div>
+            <img id="tut-chef" class="chef tut-chef-img" src="img/npc.png" alt="Xef Kaito"/>
+          </div>
+          <div class="tut-bubble">
+            <div class="tut-bubble-name">XEF KAITO · 寿司</div>
+            <div class="tut-bubble-text" id="tut-text">Carregant...</div>
+            <button class="btn btn-primary tut-next-btn" id="tut-next" style="display:none">SEGÜENT ▶</button>
+          </div>
+        </div>
+
+        <div class="tut-stage-area">
+          <div class="tut-mini-belt">
+            <div class="tut-mini-rail"></div>
+            <div class="tut-mini-pattern"></div>
+            <div class="tut-plate-slot" id="tut-plate-slot"></div>
+            <div class="tut-mini-trash">
+              <div class="tut-mini-trash-mouth"></div>
+              <span>ESCOMBRARIES</span>
+            </div>
+          </div>
+          <div class="tut-mini-tubes" id="tut-mini-tubes"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- PANTALLA 3 · SELECTOR DE NIVELLS                          -->
+  <!-- ======================================================== -->
+  <section id="screen-levels" class="screen">
+    <div class="panel glass wide">
+      <header class="panel-head">
+        <h2>🍣 TORNS DE TREBALL</h2>
+        <button class="btn-ghost" data-go="landing">← Tornar</button>
+      </header>
+      <p class="panel-sub">Tria un torn. Completa'l per desblocar el següent.</p>
+      <div id="level-grid" class="level-grid"></div>
+      <div class="level-legend">
+        <span><i class="dot dot-easy"></i> 1-10 · Greus (FA·LA·DO → DO·MI·SOL)</span>
+        <span><i class="dot dot-mid"></i> 11-16 · Aguts (DO·RE·MI·FA)</span>
+        <span><i class="dot dot-hard"></i> 17-20 · Frenètic · TOT</span>
+        <button class="btn-ghost danger" id="reset-progress">↺ Reiniciar progrés</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- PANTALLA 4 · GAMEPLAY                                     -->
+  <!-- ======================================================== -->
+  <section id="screen-game" class="screen game-screen">
+    <header id="hud">
+      <div class="hud-cell">
+        <span class="hud-label">TORN</span>
+        <span class="hud-val" id="hud-level">01</span>
+      </div>
+      <div class="hud-cell">
+        <span class="hud-label">PUNTS</span>
+        <div class="odometer" id="hud-score" data-value="0"></div>
+      </div>
+      <div class="hud-cell">
+        <span class="hud-label">VIDES</span>
+        <span class="hud-val" id="hud-lives">♥♥♥♥♥</span>
+      </div>
+      <div class="hud-cell">
+        <span class="hud-label">PLATS</span>
+        <span class="hud-val"><span id="hud-done">0</span>/<span id="hud-target">10</span></span>
+      </div>
+      <div class="hud-cell hud-vol">
+        <span class="hud-label">MÚSICA ♫</span>
+        <input type="range" id="hud-music" class="hud-slider" min="0" max="100"/>
+      </div>
+      <button class="btn-ghost" id="pause-game" title="Pausa (P)">❚❚ Pausa</button>
+      <button class="btn-ghost" id="quit-game">✕ Sortir</button>
+    </header>
+
+    <div id="kitchen">
+      <div id="chef-host">
+        <div class="chef-aura"></div>
+        <img id="chef" class="chef neutral" src="img/npc.png" alt="Xef Kaito"/>
+        <div class="chef-base"></div>
+      </div>
+      <div id="led-strip-top"></div>
+      <div id="belt">
+        <div id="belt-rail"></div>
+        <div id="belt-pattern"></div>
+        <canvas id="particles"></canvas>
+        <div id="plates-layer"></div>
+        <div id="trash">
+          <div class="trash-mouth"></div>
+          <span>ESCOMBRARIES</span>
+        </div>
+        <div id="arm">
+          <div class="arm-stem"></div>
+          <div class="arm-claw">⌬</div>
+        </div>
+      </div>
+      <div id="led-strip-bot"></div>
+      <div id="tubes"></div>
+    </div>
+
+    <div id="combo-pop"></div>
+    <div id="flash"></div>
+
+    <!-- Pause / End overlay -->
+    <div id="overlay" class="overlay hidden">
+      <div class="overlay-card glass">
+        <h2 id="ov-title">PAUSA</h2>
+        <p id="ov-text"></p>
+        <div class="ov-stats" id="ov-stats"></div>
+        <div class="ov-actions">
+          <button class="btn btn-secondary" id="ov-retry">↻ TORNAR-HO A PROVAR</button>
+          <button class="btn btn-primary" id="ov-next">▶ SEGÜENT TORN</button>
+          <button class="btn-ghost" id="ov-menu">SELECTOR DE TORNS</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="countdown" class="hidden"><span id="cd-num">3</span></div>
+
+    <!-- Overlay de pausa -->
+    <div id="pause-overlay" class="overlay hidden">
+      <div class="overlay-card glass">
+        <h2>❚❚ PAUSA</h2>
+        <p>Cinta aturada. Prem RESUME o la tecla P per continuar.</p>
+        <div class="ov-actions">
+          <button class="btn btn-primary" id="resume-game">▶ RESUME</button>
+          <button class="btn btn-secondary" id="pause-quit">SORTIR</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PANELL DE CONFIGURACIÓ ====== -->
+  <div id="settings-panel" class="overlay hidden">
+    <div class="overlay-card glass">
+      <h2>⚙ CONFIGURACIÓ</h2>
+      <div class="settings-grid">
+        <div class="setting-row">
+          <label>Volum música</label>
+          <input type="range" id="vol-music" min="0" max="100" value="35"/>
+          <span class="vol-val" id="vol-music-val">35</span>
+        </div>
+        <div class="setting-row">
+          <label>Volum efectes</label>
+          <input type="range" id="vol-sfx" min="0" max="100" value="80"/>
+          <span class="vol-val" id="vol-sfx-val">80</span>
+        </div>
+        <div class="setting-row">
+          <label>So de la nota a l'encert</label>
+          <input type="checkbox" id="opt-tones" checked/>
+        </div>
+        <div class="setting-row">
+          <label>Mode daltònic (alt contrast)</label>
+          <input type="checkbox" id="opt-cb"/>
+        </div>
+        <div class="setting-row">
+          <label>Música ambient</label>
+          <input type="checkbox" id="opt-music" checked/>
+        </div>
+      </div>
+      <div class="ov-actions">
+        <button class="btn btn-primary" id="settings-close">Tornar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

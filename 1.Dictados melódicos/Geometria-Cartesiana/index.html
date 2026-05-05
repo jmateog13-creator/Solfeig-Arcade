@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geometria Sònica</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Fons de paper mil·limetrat persistent -->
+  <div id="cosmos">
+    <div class="taca taca-1"></div>
+    <div class="taca taca-2"></div>
+    <div class="taca taca-3"></div>
+    <div id="estrelles-fons"></div>
+  </div>
+
+  <!-- =============================================== -->
+  <!-- PANTALLA 1 — LANDING -->
+  <!-- =============================================== -->
+  <section id="pantalla-landing" class="pantalla activa">
+    <div class="landing-content">
+      <h1 class="titol-principal">
+        <span class="titol-fila-1">Geometria</span>
+        <span class="titol-fila-2">Sònica</span>
+      </h1>
+      <p class="subtitol">Calcula les coordenades del so i traça la geometria oculta</p>
+      <div class="botons-landing">
+        <button class="boto-mistic boto-primari" data-accio="iniciar">
+          <span class="boto-icona">▶️</span>
+          <span class="boto-text">Calcular</span>
+        </button>
+        <button class="boto-mistic boto-secundari" data-accio="tutorial">
+          <span class="boto-icona">📐</span>
+          <span class="boto-text">Com es Juga</span>
+        </button>
+      </div>
+      <p class="peu-landing">Un viatge cartesià pel pentagrama vectorial</p>
+    </div>
+  </section>
+
+  <!-- =============================================== -->
+  <!-- PANTALLA 2 — TUTORIAL -->
+  <!-- =============================================== -->
+  <section id="pantalla-tutorial" class="pantalla">
+    <div class="tutorial-content">
+      <h2 class="titol-secundari">Com Resoldre la Geometria</h2>
+      <div class="passos-tutorial">
+        <article class="pas-tutorial">
+          <div class="pas-numero">1</div>
+          <div class="pas-icona">f(x)</div>
+          <h3>Escolta la Coordenada</h3>
+          <p>Prem el botó per emetre la freqüència de la coordenada Y oculta al pla cartesià.</p>
+        </article>
+        <article class="pas-tutorial">
+          <div class="pas-numero">2</div>
+          <div class="pas-icona">📐</div>
+          <h3>Calcula l'Alçada</h3>
+          <p>Identifica l'alçada al pla cartesià on creus que correspon el so. Cada coordenada amaga una nota.</p>
+        </article>
+        <article class="pas-tutorial">
+          <div class="pas-numero">3</div>
+          <div class="pas-icona">✦</div>
+          <h3>Traça la Geometria</h3>
+          <p>Si encertes, el vèrtex es fixa i es dibuixa una aresta cap al següent punt. La figura es revela.</p>
+        </article>
+      </div>
+      <div class="tutorial-extra">
+        <p><span class="dau-extra">⚡ Càlculs:</span> tens tres intents. Cada error en consumeix un i s'esborra l'última aresta.</p>
+        <p><span class="dau-extra">📊 Progrés:</span> supera un nivell per desbloquejar el següent fins arribar al Mestre Cartesià.</p>
+      </div>
+      <button class="boto-mistic boto-primari" data-accio="tutorial-fet">
+        <span class="boto-text">Entès!</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- =============================================== -->
+  <!-- PANTALLA 3 — SELECTOR DE NIVELLS -->
+  <!-- =============================================== -->
+  <section id="pantalla-nivells" class="pantalla">
+    <div class="nivells-content">
+      <header class="capçalera-nivells">
+        <button class="boto-tornar boto-tornar-fort" data-accio="tornar-landing">
+          <span class="tornar-fletxa">←</span>
+          <span class="tornar-text">Menú Principal</span>
+        </button>
+        <h2 class="titol-secundari">Mapa Vectorial</h2>
+        <button class="boto-tornar" data-accio="reset-progres" title="Reiniciar progrés">↺ Reiniciar</button>
+      </header>
+      <p class="instruccio-nivells">Selecciona una figura per resoldre</p>
+      <div id="graella-nivells"></div>
+      <div class="llegenda-fases">
+        <div><span class="punt-fase fase-1"></span> Esbós (1–4)</div>
+        <div><span class="punt-fase fase-2"></span> Polígon (5–8)</div>
+        <div><span class="punt-fase fase-3"></span> Geòmetra (9–12)</div>
+        <div><span class="punt-fase fase-4"></span> Mestre Cartesià (13–15)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================== -->
+  <!-- PANTALLA 4 — JOC -->
+  <!-- =============================================== -->
+  <section id="pantalla-joc" class="pantalla">
+    <header class="hud-superior">
+      <button class="boto-tornar" data-accio="tornar-base">⟵ Tornar a la Base</button>
+      <div class="info-nivell">
+        <span class="etiqueta-nivell">Nivell</span>
+        <span id="hud-nivell">1</span>
+        <span class="fase-nivell" id="hud-fase">Esbós</span>
+      </div>
+      <div class="info-energia">
+        <span class="etiqueta-energia">Càlculs</span>
+        <span id="hud-vides">⚡ ⚡ ⚡</span>
+      </div>
+    </header>
+
+    <main class="joc-area">
+      <aside class="zona-cant">
+        <button id="boto-escoltar" class="boto-cant">
+          <span class="cant-icon">f(x)</span>
+          <span class="cant-text">Calcular</span>
+          <span class="cant-subtext">Coordenada Y</span>
+        </button>
+        <div class="progres-ronda">
+          <span class="ronda-etiqueta">Vèrtexs resolts</span>
+          <div id="progres-rondes"></div>
+        </div>
+        <div id="missatge-feedback" class="missatge-feedback"></div>
+      </aside>
+
+      <section class="zona-pentagrama">
+        <canvas id="canvas-geometria" width="800" height="360"></canvas>
+      </section>
+    </main>
+
+    <!-- Modal de victòria/derrota -->
+    <div id="modal-final" class="modal-final ocult">
+      <div class="modal-contingut">
+        <h3 id="modal-titol"></h3>
+        <p id="modal-text"></p>
+        <div class="modal-botons">
+          <button class="boto-mistic boto-secundari" data-accio="modal-mapa">Mapa Vectorial</button>
+          <button class="boto-mistic boto-primari" id="boto-modal-principal"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="game.js"></script>
+</body>
+</html>

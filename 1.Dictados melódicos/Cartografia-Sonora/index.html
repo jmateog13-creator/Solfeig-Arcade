@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rutes de Navegació</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="cosmos">
+    <div class="taca taca-1"></div>
+    <div class="taca taca-2"></div>
+    <div class="taca taca-3"></div>
+    <div id="estrelles-fons"></div>
+  </div>
+
+  <section id="pantalla-landing" class="pantalla activa">
+    <div class="landing-content">
+      <h1 class="titol-principal">
+        <span class="titol-fila-1">Rutes de</span>
+        <span class="titol-fila-2">Navegació</span>
+      </h1>
+      <p class="subtitol">Escolta les coordenades del mar i traça la ruta cap al port secret</p>
+      <div class="botons-landing">
+        <button class="boto-mistic boto-primari" data-accio="iniciar">
+          <span class="boto-icona">▶️</span>
+          <span class="boto-text">Salpar</span>
+        </button>
+        <button class="boto-mistic boto-secundari" data-accio="tutorial">
+          <span class="boto-icona">🧭</span>
+          <span class="boto-text">Com es Juga</span>
+        </button>
+      </div>
+      <p class="peu-landing">Una travessia pels mars del so</p>
+    </div>
+  </section>
+
+  <section id="pantalla-tutorial" class="pantalla">
+    <div class="tutorial-content">
+      <h2 class="titol-secundari">Com Cartografiar les Rutes</h2>
+      <div class="passos-tutorial">
+        <article class="pas-tutorial">
+          <div class="pas-numero">1</div>
+          <div class="pas-icona">🔔</div>
+          <h3>Toca la Campana</h3>
+          <p>Prem la campana del vaixell perquè ressoni el to de la latitud oculta al mapa.</p>
+        </article>
+        <article class="pas-tutorial">
+          <div class="pas-numero">2</div>
+          <div class="pas-icona">🧭</div>
+          <h3>Calcula la Latitud</h3>
+          <p>Identifica el paral·lel exacte on creus que es troba el so amagat al mar.</p>
+        </article>
+        <article class="pas-tutorial">
+          <div class="pas-numero">3</div>
+          <div class="pas-icona">⚓</div>
+          <h3>Marca la Ruta</h3>
+          <p>Si encertes, traçaràs una línia de tinta cap al següent port secret de l'arxipèlag.</p>
+        </article>
+      </div>
+      <div class="tutorial-extra">
+        <p><span class="dau-extra">⚓ Àncores:</span> tens tres àncores de reserva. Cada error en consumeix una.</p>
+        <p><span class="dau-extra">🌊 Progrés:</span> supera una travessia per desbloquejar la següent fins arribar a Almirall del Mar.</p>
+      </div>
+      <button class="boto-mistic boto-primari" data-accio="tutorial-fet">
+        <span class="boto-text">Entès!</span>
+      </button>
+    </div>
+  </section>
+
+  <section id="pantalla-nivells" class="pantalla">
+    <div class="nivells-content">
+      <header class="capçalera-nivells">
+        <button class="boto-tornar boto-tornar-fort" data-accio="tornar-landing">
+          <span class="tornar-fletxa">←</span>
+          <span class="tornar-text">Menú Principal</span>
+        </button>
+        <h2 class="titol-secundari">Cartes de Navegació</h2>
+        <button class="boto-tornar" data-accio="reset-progres" title="Reiniciar progrés">↺ Reiniciar</button>
+      </header>
+      <p class="instruccio-nivells">Selecciona una travessia per cartografiar</p>
+      <div id="graella-nivells"></div>
+      <div class="llegenda-fases">
+        <div><span class="punt-fase fase-1"></span> Mariner (1–4)</div>
+        <div><span class="punt-fase fase-2"></span> Navegant (5–8)</div>
+        <div><span class="punt-fase fase-3"></span> Cartògraf (9–12)</div>
+        <div><span class="punt-fase fase-4"></span> Almirall (13–15)</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pantalla-joc" class="pantalla">
+    <header class="hud-superior">
+      <button class="boto-tornar" data-accio="tornar-base">⟵ Tornar al Port</button>
+      <div class="info-nivell">
+        <span class="etiqueta-nivell">Travessia</span>
+        <span id="hud-nivell">1</span>
+        <span class="fase-nivell" id="hud-fase">Mariner</span>
+      </div>
+      <div class="info-energia">
+        <span class="etiqueta-energia">Àncores</span>
+        <span id="hud-vides">⚓ ⚓ ⚓</span>
+      </div>
+    </header>
+
+    <main class="joc-area">
+      <aside class="zona-cant">
+        <button id="boto-escoltar" class="boto-cant">
+          <span class="cant-icon">🔔</span>
+          <span class="cant-text">Tocar Campana</span>
+          <span class="cant-subtext">del Vaixell</span>
+        </button>
+        <div class="progres-ronda">
+          <span class="ronda-etiqueta">Ports trobats</span>
+          <div id="progres-rondes"></div>
+        </div>
+        <div id="missatge-feedback" class="missatge-feedback"></div>
+      </aside>
+
+      <section class="zona-pentagrama">
+        <canvas id="canvas-mapa" width="800" height="360"></canvas>
+      </section>
+    </main>
+
+    <div id="modal-final" class="modal-final ocult">
+      <div class="modal-contingut">
+        <h3 id="modal-titol"></h3>
+        <p id="modal-text"></p>
+        <div class="modal-botons">
+          <button class="boto-mistic boto-secundari" data-accio="modal-mapa">Cartes</button>
+          <button class="boto-mistic boto-primari" id="boto-modal-principal"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="game.js"></script>
+</body>
+</html>
